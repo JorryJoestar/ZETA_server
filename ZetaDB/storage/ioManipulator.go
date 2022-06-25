@@ -31,7 +31,7 @@ func GetIOManipulator() (*IOManipulator, error) {
 	//try to open data file from location dfl
 	dFile, dfOpenError := os.OpenFile(utility.DEFAULT_DATAFILE_LOCATION, os.O_RDWR|os.O_SYNC, 0)
 	if dfOpenError != nil {
-		return nil, dfOpenError
+		ioMinstance.dataFile, _ = os.Create("data.zdb")
 	} else {
 		ioMinstance.dataFile = dFile
 	}
@@ -39,7 +39,7 @@ func GetIOManipulator() (*IOManipulator, error) {
 	//try to open index file from location ifl
 	iFile, ifOpenError := os.OpenFile(utility.DEFAULT_INDEXFILE_LOCATION, os.O_RDWR|os.O_SYNC, 0)
 	if ifOpenError != nil {
-		return nil, ifOpenError
+		ioMinstance.indexFile, _ = os.Create("index.zdb")
 	} else {
 		ioMinstance.indexFile = iFile
 	}
@@ -47,7 +47,7 @@ func GetIOManipulator() (*IOManipulator, error) {
 	//try to open log file from location lfl
 	lFile, lfOpenError := os.OpenFile(utility.DEFAULT_LOGFILE_LOCATION, os.O_RDWR|os.O_SYNC, 0)
 	if lfOpenError != nil {
-		return nil, lfOpenError
+		ioMinstance.logFile, _ = os.Create("log.zdb")
 	} else {
 		ioMinstance.logFile = lFile
 	}

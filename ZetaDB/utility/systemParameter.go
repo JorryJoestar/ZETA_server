@@ -5,16 +5,6 @@ const (
 	DEFAULT_DATA_BUFFER_SIZE  int = 500 //page number in dataBuffer
 	DEFAULT_INDEX_BUFFER_SIZE int = 500 //page number in indexBuffer
 
-	DEFAULT_DATAFILE_LOCATION string = "/Users/jorryjoestar/Documents/go/src/ZetaDB/file/data.zdb"
-	//"/root/zeta/file/data.zdb"
-	//"/Users/jorryjoestar/Documents/go/src/ZetaDB/file/data.zdb"
-	DEFAULT_INDEXFILE_LOCATION string = "/Users/jorryjoestar/Documents/go/src/ZetaDB/file/index.zdb"
-	//"/root/zeta/file/index.zdb"
-	//"/Users/jorryjoestar/Documents/go/src/ZetaDB/file/index.zdb"
-	DEFAULT_LOGFILE_LOCATION string = "/Users/jorryjoestar/Documents/go/src/ZetaDB/file/log.zdb"
-	//"/root/zeta/file/log.zdb"
-	//"/Users/jorryjoestar/Documents/go/src/ZetaDB/file/log.zdb"
-
 	//if a tuple has a field whose length in bytes is over this value, it is invalid to generate map key for this value
 	DEFAULT_TUPLE_SINGAL_FIELD_OVER_LONG_LENGTH uint16 = 30
 
@@ -35,6 +25,16 @@ const (
 )
 
 var (
+	DEFAULT_DATAFILE_LOCATION string = "/Users/jorryjoestar/Documents/go/src/ZetaDB/file/data.zdb"
+	//"/root/zeta/file/data.zdb"
+	//"/Users/jorryjoestar/Documents/go/src/ZetaDB/file/data.zdb"
+	DEFAULT_INDEXFILE_LOCATION string = "/Users/jorryjoestar/Documents/go/src/ZetaDB/file/index.zdb"
+	//"/root/zeta/file/index.zdb"
+	//"/Users/jorryjoestar/Documents/go/src/ZetaDB/file/index.zdb"
+	DEFAULT_LOGFILE_LOCATION string = "/Users/jorryjoestar/Documents/go/src/ZetaDB/file/log.zdb"
+	//"/root/zeta/file/log.zdb"
+	//"/Users/jorryjoestar/Documents/go/src/ZetaDB/file/log.zdb"
+
 	DEFAULT_KEYTABLES_SCHEMA = [17]string{
 		"CREATE TABLE k_userId_userName (userId INT PRIMARY KEY, userName VARCHAR(20));",
 		"CREATE TABLE k_userId_password (userId INT PRIMARY KEY, passwords VARCHAR(20));",

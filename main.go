@@ -6,5 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println(ZetaDB.ExecuteSql(0, "initialize;"))
+	db := ZetaDB.GetDatabase("")
+
+	fmt.Println(db.ExecuteSql(0, "initialize;"))
 }

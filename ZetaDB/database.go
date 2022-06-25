@@ -4,9 +4,39 @@ import (
 	"ZETA_server/ZetaDB/execution"
 	parser "ZETA_server/ZetaDB/parser"
 	"ZETA_server/ZetaDB/storage"
+	"ZETA_server/ZetaDB/utility"
+	"os"
+	"sync"
 )
 
-func ExecuteSql(currentUserId int32, sqlString string) (int32, string) {
+type Database struct{}
+
+var dbInstance *Database
+var dbOnce sync.Once
+
+//call this function to get database
+func GetDatabase(fileLocation string) *Database {
+
+	//alter file location
+	if fileLocation == "" { // set file location to defaut
+		currentLocation, _ := os.Getwd()
+
+		utility.DEFAULT_DATAFILE_LOCATION = currentLocation + "/ZetaDB/file/data.zdb"
+		utility.DEFAULT_INDEXFILE_LOCATION = currentLocation + "/ZetaDB/file/index.zdb"
+		utility.DEFAULT_LOGFILE_LOCATION = currentLocation + "/ZetaDB/file/log.zdb"
+	} else {
+		utility.DEFAULT_DATAFILE_LOCATION = fileLocation + "/data.zdb"
+		utility.DEFAULT_INDEXFILE_LOCATION = fileLocation + "/index.zdb"
+		utility.DEFAULT_LOGFILE_LOCATION = fileLocation + "/log.zdb"
+	}
+
+	dbOnce.Do(func() {
+		dbInstance = &Database{}
+	})
+	return dbInstance
+}
+
+func (db *Database) ExecuteSql(currentUserId int32, sqlString string) (int32, string) {
 	//get Parser, rewriter, executionEngine, transaction
 	Parser := parser.GetParser()
 	rewriter := execution.GetRewriter()
