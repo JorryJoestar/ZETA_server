@@ -1,0 +1,82 @@
+@startuml
+
+class Field{
+    -isNull bool
+	-data   []byte
+    
+    +{static} NewFieldFromBytes(bytes []byte) (*Field, error)
+    +{static} NewNullField() *Field
+    +FieldLen() int
+    +FieldToBytes() ([]byte, error)
+    +FieldIsNull() bool
+    +SetFieldNull()
+}
+
+class Domain{
+    -domainName string
+	-domainType DomainType
+	-n int32
+	-d int32
+
+    +{static} NewDomain(name string, t DomainType, inN int32, inD int32) (*Domain, error)
+    +GetDomainName() string
+    +GetDomainType() DomainType
+    +GetDomainN() (int32, error)
+    +GetDomainD() (int32, error)
+    +DomainSizeUnfixed() bool
+    +DomainSizeInBytes() (int, error)
+}
+
+class Schema{
+    -tableName string
+	-domains []*Domain
+	-constraints []*Constraint
+
+    +{static} NewSchema(name string, domainList []*Domain, constraintList []*Constraint) (*Schema, error)
+    +UnfixedDomainNum() int
+    +GetSchemaTableName() string
+    +GetSchemaDomains() []*Domain
+    +GetSchemaDomain(index int) (*Domain, error)
+    +GetSchemaConstraints() []*Constraint
+    +GetSchemaDomainNum() int
+    +GetSchemaConstraintNum() int
+}
+
+class Tuple{
+    -tableId uint32
+	-tupleId uint32
+	-schema *Schema
+    -isNullBytes []byte
+	-fields []*Field
+
+    +{static} NewTupleFromBytes(bytes []byte, s *Schema, tableId uint32) (*Tuple, error)
+    +{static} NewTuple(tableId uint32, tupleId uint32, schema *Schema, fields []*Field) (*Tuple, error)
+    +TupleToBytes() ([]byte, error)
+    +TupleGetTupleId() uint32
+    +TupleSetTupleId(tupId uint32)
+    +TupleGetTableId() uint32
+    +TupleGetFieldValue(index int) ([]byte, error)
+    +TupleSetFieldValue(data []byte, index int) error
+    +TupleGetFields() []*Field
+    +TupleFieldIsNull(index int) (bool, error)
+    +TupleSetFieldNull(index int) error
+    +TupleSizeOfIsNullBytes() int
+    +TupleSizeInBytes() int
+    +TupleSizeFixed() bool
+}
+
+class Table{
+    
+}
+
+class Constraint{
+
+}
+
+Schema o-- Domain
+Tuple o-- Field
+Tuple *-- Schema
+Table o-- Tuple
+Schema o-- Constraint
+
+@enduml

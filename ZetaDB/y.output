@@ -1,0 +1,7072 @@
+
+state 0
+	$accept: .ast $end 
+
+	START  shift 24
+	COMMIT  shift 25
+	ROLLBACK  shift 26
+	SHOW  shift 27
+	CONNECT  shift 40
+	INITIALIZE  shift 31
+	HALT  shift 33
+	SELECT  shift 46
+	INSERTINTO  shift 38
+	CREATE  shift 35
+	DROP  shift 32
+	ALTER  shift 36
+	UPDATE  shift 39
+	DELETE  shift 37
+	BEGINTOKEN  shift 23
+	CALL  shift 44
+	LPAREN  shift 42
+	.  error
+
+	ast  goto 1
+	ddl  goto 2
+	dcl  goto 4
+	createUserStmt  goto 28
+	logUserStmt  goto 29
+	dml  goto 3
+	dql  goto 5
+	dqlEntry  goto 34
+	query  goto 43
+	selectStmt  goto 45
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	createTableStmt  goto 6
+	dropTableStmt  goto 7
+	alterTableAddStmt  goto 8
+	alterTableDropStmt  goto 9
+	createAssertStmt  goto 10
+	dropAssertStmt  goto 11
+	createViewStmt  goto 12
+	dropViewStmt  goto 13
+	createIndexStmt  goto 14
+	dropIndexStmt  goto 15
+	createTriggerStmt  goto 16
+	dropTriggerStmt  goto 17
+	createPsmStmt  goto 18
+	dropPsmStmt  goto 19
+	psmCallStmt  goto 30
+	psmCall  goto 41
+
+state 1
+	$accept:  ast.$end 
+
+	$end  accept
+	.  error
+
+
+state 2
+	ast:  ddl.    (1)
+
+	.  reduce 1 (src line 489)
+
+
+state 3
+	ast:  dml.    (2)
+
+	.  reduce 2 (src line 500)
+
+
+state 4
+	ast:  dcl.    (3)
+
+	.  reduce 3 (src line 510)
+
+
+state 5
+	ast:  dql.    (4)
+
+	.  reduce 4 (src line 520)
+
+
+state 6
+	ddl:  createTableStmt.    (5)
+
+	.  reduce 5 (src line 553)
+
+
+state 7
+	ddl:  dropTableStmt.    (6)
+
+	.  reduce 6 (src line 562)
+
+
+state 8
+	ddl:  alterTableAddStmt.    (7)
+
+	.  reduce 7 (src line 570)
+
+
+state 9
+	ddl:  alterTableDropStmt.    (8)
+
+	.  reduce 8 (src line 578)
+
+
+state 10
+	ddl:  createAssertStmt.    (9)
+
+	.  reduce 9 (src line 586)
+
+
+state 11
+	ddl:  dropAssertStmt.    (10)
+
+	.  reduce 10 (src line 594)
+
+
+state 12
+	ddl:  createViewStmt.    (11)
+
+	.  reduce 11 (src line 602)
+
+
+state 13
+	ddl:  dropViewStmt.    (12)
+
+	.  reduce 12 (src line 610)
+
+
+state 14
+	ddl:  createIndexStmt.    (13)
+
+	.  reduce 13 (src line 618)
+
+
+state 15
+	ddl:  dropIndexStmt.    (14)
+
+	.  reduce 14 (src line 626)
+
+
+state 16
+	ddl:  createTriggerStmt.    (15)
+
+	.  reduce 15 (src line 634)
+
+
+state 17
+	ddl:  dropTriggerStmt.    (16)
+
+	.  reduce 16 (src line 642)
+
+
+state 18
+	ddl:  createPsmStmt.    (17)
+
+	.  reduce 17 (src line 650)
+
+
+state 19
+	ddl:  dropPsmStmt.    (18)
+
+	.  reduce 18 (src line 658)
+
+
+state 20
+	dml:  deleteStmt.    (19)
+
+	.  reduce 19 (src line 678)
+
+
+state 21
+	dml:  insertStmt.    (20)
+
+	.  reduce 20 (src line 687)
+
+
+state 22
+	dml:  updateStmt.    (21)
+
+	.  reduce 21 (src line 695)
+
+
+state 23
+	dcl:  BEGINTOKEN.SEMICOLON 
+
+	SEMICOLON  shift 47
+	.  error
+
+
+state 24
+	dcl:  START.TRANSACTION SEMICOLON 
+
+	TRANSACTION  shift 48
+	.  error
+
+
+state 25
+	dcl:  COMMIT.SEMICOLON 
+
+	SEMICOLON  shift 49
+	.  error
+
+
+state 26
+	dcl:  ROLLBACK.SEMICOLON 
+
+	SEMICOLON  shift 50
+	.  error
+
+
+state 27
+	dcl:  SHOW.TABLES SEMICOLON 
+	dcl:  SHOW.ASSERTIONS SEMICOLON 
+	dcl:  SHOW.VIEWS SEMICOLON 
+	dcl:  SHOW.INDEXS SEMICOLON 
+	dcl:  SHOW.TRIGGERS SEMICOLON 
+	dcl:  SHOW.FUNCTIONS SEMICOLON 
+	dcl:  SHOW.PROCEDURES SEMICOLON 
+
+	TABLES  shift 51
+	ASSERTIONS  shift 52
+	VIEWS  shift 53
+	INDEXS  shift 54
+	TRIGGERS  shift 55
+	FUNCTIONS  shift 56
+	PROCEDURES  shift 57
+	.  error
+
+
+state 28
+	dcl:  createUserStmt.    (105)
+
+	.  reduce 105 (src line 2126)
+
+
+state 29
+	dcl:  logUserStmt.    (106)
+
+	.  reduce 106 (src line 2129)
+
+
+state 30
+	dcl:  psmCallStmt.    (107)
+
+	.  reduce 107 (src line 2132)
+
+
+state 31
+	dcl:  INITIALIZE.SEMICOLON 
+
+	SEMICOLON  shift 58
+	.  error
+
+
+state 32
+	dcl:  DROP.USER ID SEMICOLON 
+	dropTableStmt:  DROP.TABLE ID SEMICOLON 
+	dropAssertStmt:  DROP.ASSERTION ID SEMICOLON 
+	dropViewStmt:  DROP.VIEW ID SEMICOLON 
+	dropIndexStmt:  DROP.INDEX ID SEMICOLON 
+	dropTriggerStmt:  DROP.TRIGGER ID SEMICOLON 
+	dropPsmStmt:  DROP.FUNCTION ID SEMICOLON 
+	dropPsmStmt:  DROP.PROCEDURE ID SEMICOLON 
+
+	USER  shift 59
+	TABLE  shift 60
+	ASSERTION  shift 61
+	VIEW  shift 62
+	INDEX  shift 63
+	TRIGGER  shift 64
+	PROCEDURE  shift 66
+	FUNCTION  shift 65
+	.  error
+
+
+state 33
+	dcl:  HALT.SEMICOLON 
+
+	SEMICOLON  shift 67
+	.  error
+
+
+state 34
+	dql:  dqlEntry.SEMICOLON 
+	dqlEntry:  dqlEntry.UNION dqlEntry 
+	dqlEntry:  dqlEntry.DIFFERENCE dqlEntry 
+	dqlEntry:  dqlEntry.INTERSECTION dqlEntry 
+
+	UNION  shift 69
+	DIFFERENCE  shift 70
+	INTERSECTION  shift 71
+	SEMICOLON  shift 68
+	.  error
+
+
+state 35
+	createUserStmt:  CREATE.USER ID PASSWORD PASSWORDS SEMICOLON 
+	createUserStmt:  CREATE.USER ID PASSWORD ID SEMICOLON 
+	createUserStmt:  CREATE.USER ID PASSWORD INTVALUE SEMICOLON 
+	createTableStmt:  CREATE.TABLE ID LPAREN attributeDeclarationList RPAREN SEMICOLON 
+	createTableStmt:  CREATE.TABLE ID LPAREN attributeDeclarationList COMMA constraintList RPAREN SEMICOLON 
+	createAssertStmt:  CREATE.ASSERTION ID CHECK LPAREN condition RPAREN SEMICOLON 
+	createViewStmt:  CREATE.VIEW ID AS subQuery SEMICOLON 
+	createViewStmt:  CREATE.VIEW ID LPAREN attriNameList RPAREN AS subQuery SEMICOLON 
+	createIndexStmt:  CREATE.INDEX ID ON ID LPAREN attriNameList RPAREN SEMICOLON 
+	createTriggerStmt:  CREATE.TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE.TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE.TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerExecStmt 
+	createTriggerStmt:  CREATE.TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum triggerExecStmt 
+	createPsmStmt:  CREATE.PROCEDURE ID LPAREN psmParameterList RPAREN psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE.PROCEDURE ID LPAREN psmParameterList RPAREN psmBody 
+	createPsmStmt:  CREATE.PROCEDURE ID psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE.PROCEDURE ID psmBody 
+	createPsmStmt:  CREATE.FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE.FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain psmBody 
+	createPsmStmt:  CREATE.FUNCTION ID RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE.FUNCTION ID RETURNS domain psmBody 
+
+	USER  shift 72
+	TABLE  shift 73
+	ASSERTION  shift 74
+	VIEW  shift 75
+	INDEX  shift 76
+	TRIGGER  shift 77
+	PROCEDURE  shift 78
+	FUNCTION  shift 79
+	.  error
+
+
+state 36
+	alterTableAddStmt:  ALTER.TABLE ID ADD attributeDeclaration SEMICOLON 
+	alterTableAddStmt:  ALTER.TABLE ID ADD constraintWithName SEMICOLON 
+	alterTableDropStmt:  ALTER.TABLE ID DROP ID SEMICOLON 
+	alterTableDropStmt:  ALTER.TABLE ID DROP CONSTRAINT ID SEMICOLON 
+
+	TABLE  shift 80
+	.  error
+
+
+state 37
+	deleteStmt:  DELETE.FROM ID WHERE condition SEMICOLON 
+
+	FROM  shift 81
+	.  error
+
+
+state 38
+	insertStmt:  INSERTINTO.ID VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO.ID VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+	insertStmt:  INSERTINTO.ID LPAREN attriNameList RPAREN VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO.ID LPAREN attriNameList RPAREN VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+
+	ID  shift 82
+	.  error
+
+
+state 39
+	updateStmt:  UPDATE.ID SET updateList WHERE condition SEMICOLON 
+
+	ID  shift 83
+	.  error
+
+
+state 40
+	logUserStmt:  CONNECT.AS USER ID PASSWORD PASSWORDS SEMICOLON 
+	logUserStmt:  CONNECT.AS USER ID PASSWORD ID SEMICOLON 
+	logUserStmt:  CONNECT.AS USER ID PASSWORD INTVALUE SEMICOLON 
+
+	AS  shift 84
+	.  error
+
+
+state 41
+	psmCallStmt:  psmCall.SEMICOLON 
+
+	SEMICOLON  shift 85
+	.  error
+
+
+state 42
+	dqlEntry:  LPAREN.dqlEntry RPAREN 
+
+	SELECT  shift 46
+	LPAREN  shift 42
+	.  error
+
+	dqlEntry  goto 86
+	query  goto 43
+	selectStmt  goto 45
+
+state 43
+	dqlEntry:  query.    (27)
+
+	.  reduce 27 (src line 761)
+
+
+state 44
+	psmCall:  CALL.ID LPAREN psmValueList RPAREN 
+	psmCall:  CALL.ID LPAREN RPAREN 
+
+	ID  shift 87
+	.  error
+
+
+state 45
+	query:  selectStmt.fromStmt 
+	query:  selectStmt.fromStmt WHERE condition 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt.fromStmt ORDERBY orderByList 
+	query:  selectStmt.fromStmt WHERE condition ORDERBY orderByList 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt.fromStmt LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt WHERE condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt WHERE condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt.fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	FROM  shift 89
+	.  error
+
+	fromStmt  goto 88
+
+state 46
+	selectStmt:  SELECT.STAR 
+	selectStmt:  SELECT.selectList 
+	selectStmt:  SELECT.DISTINCT selectList 
+
+	STAR  shift 90
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	DISTINCT  shift 92
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	selectList  goto 91
+	selectListEntry  goto 93
+	aggregation  goto 95
+	expression  goto 96
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 94
+	elementaryValue  goto 104
+
+state 47
+	dcl:  BEGINTOKEN SEMICOLON.    (94)
+
+	.  reduce 94 (src line 2048)
+
+
+state 48
+	dcl:  START TRANSACTION.SEMICOLON 
+
+	SEMICOLON  shift 110
+	.  error
+
+
+state 49
+	dcl:  COMMIT SEMICOLON.    (96)
+
+	.  reduce 96 (src line 2063)
+
+
+state 50
+	dcl:  ROLLBACK SEMICOLON.    (97)
+
+	.  reduce 97 (src line 2070)
+
+
+state 51
+	dcl:  SHOW TABLES.SEMICOLON 
+
+	SEMICOLON  shift 111
+	.  error
+
+
+state 52
+	dcl:  SHOW ASSERTIONS.SEMICOLON 
+
+	SEMICOLON  shift 112
+	.  error
+
+
+state 53
+	dcl:  SHOW VIEWS.SEMICOLON 
+
+	SEMICOLON  shift 113
+	.  error
+
+
+state 54
+	dcl:  SHOW INDEXS.SEMICOLON 
+
+	SEMICOLON  shift 114
+	.  error
+
+
+state 55
+	dcl:  SHOW TRIGGERS.SEMICOLON 
+
+	SEMICOLON  shift 115
+	.  error
+
+
+state 56
+	dcl:  SHOW FUNCTIONS.SEMICOLON 
+
+	SEMICOLON  shift 116
+	.  error
+
+
+state 57
+	dcl:  SHOW PROCEDURES.SEMICOLON 
+
+	SEMICOLON  shift 117
+	.  error
+
+
+state 58
+	dcl:  INITIALIZE SEMICOLON.    (108)
+
+	.  reduce 108 (src line 2140)
+
+
+state 59
+	dcl:  DROP USER.ID SEMICOLON 
+
+	ID  shift 118
+	.  error
+
+
+state 60
+	dropTableStmt:  DROP TABLE.ID SEMICOLON 
+
+	ID  shift 119
+	.  error
+
+
+state 61
+	dropAssertStmt:  DROP ASSERTION.ID SEMICOLON 
+
+	ID  shift 120
+	.  error
+
+
+state 62
+	dropViewStmt:  DROP VIEW.ID SEMICOLON 
+
+	ID  shift 121
+	.  error
+
+
+state 63
+	dropIndexStmt:  DROP INDEX.ID SEMICOLON 
+
+	ID  shift 122
+	.  error
+
+
+state 64
+	dropTriggerStmt:  DROP TRIGGER.ID SEMICOLON 
+
+	ID  shift 123
+	.  error
+
+
+state 65
+	dropPsmStmt:  DROP FUNCTION.ID SEMICOLON 
+
+	ID  shift 124
+	.  error
+
+
+state 66
+	dropPsmStmt:  DROP PROCEDURE.ID SEMICOLON 
+
+	ID  shift 125
+	.  error
+
+
+state 67
+	dcl:  HALT SEMICOLON.    (110)
+
+	.  reduce 110 (src line 2155)
+
+
+state 68
+	dql:  dqlEntry SEMICOLON.    (22)
+
+	.  reduce 22 (src line 722)
+
+
+state 69
+	dqlEntry:  dqlEntry UNION.dqlEntry 
+
+	SELECT  shift 46
+	LPAREN  shift 42
+	.  error
+
+	dqlEntry  goto 126
+	query  goto 43
+	selectStmt  goto 45
+
+state 70
+	dqlEntry:  dqlEntry DIFFERENCE.dqlEntry 
+
+	SELECT  shift 46
+	LPAREN  shift 42
+	.  error
+
+	dqlEntry  goto 127
+	query  goto 43
+	selectStmt  goto 45
+
+state 71
+	dqlEntry:  dqlEntry INTERSECTION.dqlEntry 
+
+	SELECT  shift 46
+	LPAREN  shift 42
+	.  error
+
+	dqlEntry  goto 128
+	query  goto 43
+	selectStmt  goto 45
+
+state 72
+	createUserStmt:  CREATE USER.ID PASSWORD PASSWORDS SEMICOLON 
+	createUserStmt:  CREATE USER.ID PASSWORD ID SEMICOLON 
+	createUserStmt:  CREATE USER.ID PASSWORD INTVALUE SEMICOLON 
+
+	ID  shift 129
+	.  error
+
+
+state 73
+	createTableStmt:  CREATE TABLE.ID LPAREN attributeDeclarationList RPAREN SEMICOLON 
+	createTableStmt:  CREATE TABLE.ID LPAREN attributeDeclarationList COMMA constraintList RPAREN SEMICOLON 
+
+	ID  shift 130
+	.  error
+
+
+state 74
+	createAssertStmt:  CREATE ASSERTION.ID CHECK LPAREN condition RPAREN SEMICOLON 
+
+	ID  shift 131
+	.  error
+
+
+state 75
+	createViewStmt:  CREATE VIEW.ID AS subQuery SEMICOLON 
+	createViewStmt:  CREATE VIEW.ID LPAREN attriNameList RPAREN AS subQuery SEMICOLON 
+
+	ID  shift 132
+	.  error
+
+
+state 76
+	createIndexStmt:  CREATE INDEX.ID ON ID LPAREN attriNameList RPAREN SEMICOLON 
+
+	ID  shift 133
+	.  error
+
+
+state 77
+	createTriggerStmt:  CREATE TRIGGER.ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER.ID triggerBeforeAfterStmt triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER.ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER.ID triggerBeforeAfterStmt triggerForEachEnum triggerExecStmt 
+
+	ID  shift 134
+	.  error
+
+
+state 78
+	createPsmStmt:  CREATE PROCEDURE.ID LPAREN psmParameterList RPAREN psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE.ID LPAREN psmParameterList RPAREN psmBody 
+	createPsmStmt:  CREATE PROCEDURE.ID psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE.ID psmBody 
+
+	ID  shift 135
+	.  error
+
+
+state 79
+	createPsmStmt:  CREATE FUNCTION.ID LPAREN psmParameterList RPAREN RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION.ID LPAREN psmParameterList RPAREN RETURNS domain psmBody 
+	createPsmStmt:  CREATE FUNCTION.ID RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION.ID RETURNS domain psmBody 
+
+	ID  shift 136
+	.  error
+
+
+state 80
+	alterTableAddStmt:  ALTER TABLE.ID ADD attributeDeclaration SEMICOLON 
+	alterTableAddStmt:  ALTER TABLE.ID ADD constraintWithName SEMICOLON 
+	alterTableDropStmt:  ALTER TABLE.ID DROP ID SEMICOLON 
+	alterTableDropStmt:  ALTER TABLE.ID DROP CONSTRAINT ID SEMICOLON 
+
+	ID  shift 137
+	.  error
+
+
+state 81
+	deleteStmt:  DELETE FROM.ID WHERE condition SEMICOLON 
+
+	ID  shift 138
+	.  error
+
+
+state 82
+	insertStmt:  INSERTINTO ID.VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID.VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+	insertStmt:  INSERTINTO ID.LPAREN attriNameList RPAREN VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID.LPAREN attriNameList RPAREN VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+
+	VALUES  shift 139
+	LPAREN  shift 140
+	.  error
+
+
+state 83
+	updateStmt:  UPDATE ID.SET updateList WHERE condition SEMICOLON 
+
+	SET  shift 141
+	.  error
+
+
+state 84
+	logUserStmt:  CONNECT AS.USER ID PASSWORD PASSWORDS SEMICOLON 
+	logUserStmt:  CONNECT AS.USER ID PASSWORD ID SEMICOLON 
+	logUserStmt:  CONNECT AS.USER ID PASSWORD INTVALUE SEMICOLON 
+
+	USER  shift 142
+	.  error
+
+
+state 85
+	psmCallStmt:  psmCall SEMICOLON.    (213)
+
+	.  reduce 213 (src line 3526)
+
+
+state 86
+	dqlEntry:  dqlEntry.UNION dqlEntry 
+	dqlEntry:  dqlEntry.DIFFERENCE dqlEntry 
+	dqlEntry:  dqlEntry.INTERSECTION dqlEntry 
+	dqlEntry:  LPAREN dqlEntry.RPAREN 
+
+	UNION  shift 69
+	DIFFERENCE  shift 70
+	INTERSECTION  shift 71
+	RPAREN  shift 143
+	.  error
+
+
+state 87
+	psmCall:  CALL ID.LPAREN psmValueList RPAREN 
+	psmCall:  CALL ID.LPAREN RPAREN 
+
+	LPAREN  shift 144
+	.  error
+
+
+state 88
+	query:  selectStmt fromStmt.    (29)
+	query:  selectStmt fromStmt.WHERE condition 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt fromStmt.ORDERBY orderByList 
+	query:  selectStmt fromStmt.WHERE condition ORDERBY orderByList 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt.LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.WHERE condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.WHERE condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt.WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	GROUPBY  shift 146
+	ORDERBY  shift 147
+	LIMIT  shift 148
+	WHERE  shift 145
+	.  reduce 29 (src line 876)
+
+
+state 89
+	fromStmt:  FROM.joinStmt 
+	fromStmt:  FROM.fromList 
+
+	LPAREN  shift 154
+	ID  shift 151
+	.  error
+
+	subQuery  goto 153
+	joinStmt  goto 149
+	fromList  goto 150
+	fromListEntry  goto 152
+
+state 90
+	selectStmt:  SELECT STAR.    (53)
+
+	.  reduce 53 (src line 1625)
+
+
+state 91
+	selectStmt:  SELECT selectList.    (54)
+	selectList:  selectList.COMMA selectListEntry 
+
+	COMMA  shift 155
+	.  reduce 54 (src line 1634)
+
+
+state 92
+	selectStmt:  SELECT DISTINCT.selectList 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	selectList  goto 156
+	selectListEntry  goto 93
+	aggregation  goto 95
+	expression  goto 96
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 94
+	elementaryValue  goto 104
+
+state 93
+	selectList:  selectListEntry.    (56)
+
+	.  reduce 56 (src line 1655)
+
+
+state 94
+	selectListEntry:  attriNameOptionTableName.    (58)
+	selectListEntry:  attriNameOptionTableName.AS ID 
+	expressionEntry:  attriNameOptionTableName.    (224)
+
+	FROM  reduce 58 (src line 1669)
+	AS  shift 157
+	COMMA  reduce 58 (src line 1669)
+	.  reduce 224 (src line 3646)
+
+
+state 95
+	selectListEntry:  aggregation.    (60)
+	selectListEntry:  aggregation.AS ID 
+	expressionEntry:  aggregation.    (225)
+
+	FROM  reduce 60 (src line 1689)
+	AS  shift 158
+	COMMA  reduce 60 (src line 1689)
+	.  reduce 225 (src line 3655)
+
+
+state 96
+	selectListEntry:  expression.    (62)
+	selectListEntry:  expression.AS ID 
+	expressionEntry:  expression.    (226)
+
+	FROM  reduce 62 (src line 1708)
+	AS  shift 159
+	COMMA  reduce 62 (src line 1708)
+	.  reduce 226 (src line 3664)
+
+
+state 97
+	attriNameOptionTableName:  ID.    (329)
+	attriNameOptionTableName:  ID.DOT ID 
+
+	DOT  shift 160
+	.  reduce 329 (src line 4781)
+
+
+state 98
+	aggregation:  SUM.LPAREN DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  SUM.LPAREN attriNameOptionTableName RPAREN 
+
+	LPAREN  shift 161
+	.  error
+
+
+state 99
+	aggregation:  AVG.LPAREN DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  AVG.LPAREN attriNameOptionTableName RPAREN 
+
+	LPAREN  shift 162
+	.  error
+
+
+state 100
+	aggregation:  MIN.LPAREN DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  MIN.LPAREN attriNameOptionTableName RPAREN 
+
+	LPAREN  shift 163
+	.  error
+
+
+state 101
+	aggregation:  MAX.LPAREN DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  MAX.LPAREN attriNameOptionTableName RPAREN 
+
+	LPAREN  shift 164
+	.  error
+
+
+state 102
+	aggregation:  COUNT.LPAREN DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  COUNT.LPAREN attriNameOptionTableName RPAREN 
+	aggregation:  COUNT.LPAREN STAR RPAREN 
+
+	LPAREN  shift 165
+	.  error
+
+
+state 103
+	expression:  expressionEntry.PLUS expressionEntry 
+	expression:  expressionEntry.SUBTRACT expressionEntry 
+	expression:  expressionEntry.STAR expressionEntry 
+	expression:  expressionEntry.DIVISION expressionEntry 
+	expression:  expressionEntry.CONCATENATION expressionEntry 
+
+	STAR  shift 168
+	PLUS  shift 166
+	SUBTRACT  shift 167
+	DIVISION  shift 169
+	CONCATENATION  shift 170
+	.  error
+
+
+state 104
+	expressionEntry:  elementaryValue.    (223)
+
+	.  reduce 223 (src line 3636)
+
+
+state 105
+	expressionEntry:  LPAREN.expression RPAREN 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	aggregation  goto 173
+	expression  goto 171
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 104
+
+state 106
+	elementaryValue:  INTVALUE.    (331)
+
+	.  reduce 331 (src line 4811)
+
+
+state 107
+	elementaryValue:  FLOATVALUE.    (332)
+
+	.  reduce 332 (src line 4819)
+
+
+state 108
+	elementaryValue:  STRINGVALUE.    (333)
+
+	.  reduce 333 (src line 4826)
+
+
+state 109
+	elementaryValue:  BOOLVALUE.    (334)
+
+	.  reduce 334 (src line 4833)
+
+
+state 110
+	dcl:  START TRANSACTION SEMICOLON.    (95)
+
+	.  reduce 95 (src line 2056)
+
+
+state 111
+	dcl:  SHOW TABLES SEMICOLON.    (98)
+
+	.  reduce 98 (src line 2077)
+
+
+state 112
+	dcl:  SHOW ASSERTIONS SEMICOLON.    (99)
+
+	.  reduce 99 (src line 2084)
+
+
+state 113
+	dcl:  SHOW VIEWS SEMICOLON.    (100)
+
+	.  reduce 100 (src line 2091)
+
+
+state 114
+	dcl:  SHOW INDEXS SEMICOLON.    (101)
+
+	.  reduce 101 (src line 2098)
+
+
+state 115
+	dcl:  SHOW TRIGGERS SEMICOLON.    (102)
+
+	.  reduce 102 (src line 2105)
+
+
+state 116
+	dcl:  SHOW FUNCTIONS SEMICOLON.    (103)
+
+	.  reduce 103 (src line 2112)
+
+
+state 117
+	dcl:  SHOW PROCEDURES SEMICOLON.    (104)
+
+	.  reduce 104 (src line 2119)
+
+
+state 118
+	dcl:  DROP USER ID.SEMICOLON 
+
+	SEMICOLON  shift 174
+	.  error
+
+
+state 119
+	dropTableStmt:  DROP TABLE ID.SEMICOLON 
+
+	SEMICOLON  shift 175
+	.  error
+
+
+state 120
+	dropAssertStmt:  DROP ASSERTION ID.SEMICOLON 
+
+	SEMICOLON  shift 176
+	.  error
+
+
+state 121
+	dropViewStmt:  DROP VIEW ID.SEMICOLON 
+
+	SEMICOLON  shift 177
+	.  error
+
+
+state 122
+	dropIndexStmt:  DROP INDEX ID.SEMICOLON 
+
+	SEMICOLON  shift 178
+	.  error
+
+
+state 123
+	dropTriggerStmt:  DROP TRIGGER ID.SEMICOLON 
+
+	SEMICOLON  shift 179
+	.  error
+
+
+state 124
+	dropPsmStmt:  DROP FUNCTION ID.SEMICOLON 
+
+	SEMICOLON  shift 180
+	.  error
+
+
+state 125
+	dropPsmStmt:  DROP PROCEDURE ID.SEMICOLON 
+
+	SEMICOLON  shift 181
+	.  error
+
+
+state 126
+	dqlEntry:  dqlEntry.UNION dqlEntry 
+	dqlEntry:  dqlEntry UNION dqlEntry.    (23)
+	dqlEntry:  dqlEntry.DIFFERENCE dqlEntry 
+	dqlEntry:  dqlEntry.INTERSECTION dqlEntry 
+
+	.  reduce 23 (src line 729)
+
+
+state 127
+	dqlEntry:  dqlEntry.UNION dqlEntry 
+	dqlEntry:  dqlEntry.DIFFERENCE dqlEntry 
+	dqlEntry:  dqlEntry DIFFERENCE dqlEntry.    (24)
+	dqlEntry:  dqlEntry.INTERSECTION dqlEntry 
+
+	.  reduce 24 (src line 740)
+
+
+state 128
+	dqlEntry:  dqlEntry.UNION dqlEntry 
+	dqlEntry:  dqlEntry.DIFFERENCE dqlEntry 
+	dqlEntry:  dqlEntry.INTERSECTION dqlEntry 
+	dqlEntry:  dqlEntry INTERSECTION dqlEntry.    (25)
+
+	.  reduce 25 (src line 749)
+
+
+state 129
+	createUserStmt:  CREATE USER ID.PASSWORD PASSWORDS SEMICOLON 
+	createUserStmt:  CREATE USER ID.PASSWORD ID SEMICOLON 
+	createUserStmt:  CREATE USER ID.PASSWORD INTVALUE SEMICOLON 
+
+	PASSWORD  shift 182
+	.  error
+
+
+state 130
+	createTableStmt:  CREATE TABLE ID.LPAREN attributeDeclarationList RPAREN SEMICOLON 
+	createTableStmt:  CREATE TABLE ID.LPAREN attributeDeclarationList COMMA constraintList RPAREN SEMICOLON 
+
+	LPAREN  shift 183
+	.  error
+
+
+state 131
+	createAssertStmt:  CREATE ASSERTION ID.CHECK LPAREN condition RPAREN SEMICOLON 
+
+	CHECK  shift 184
+	.  error
+
+
+state 132
+	createViewStmt:  CREATE VIEW ID.AS subQuery SEMICOLON 
+	createViewStmt:  CREATE VIEW ID.LPAREN attriNameList RPAREN AS subQuery SEMICOLON 
+
+	AS  shift 185
+	LPAREN  shift 186
+	.  error
+
+
+state 133
+	createIndexStmt:  CREATE INDEX ID.ON ID LPAREN attriNameList RPAREN SEMICOLON 
+
+	ON  shift 187
+	.  error
+
+
+state 134
+	createTriggerStmt:  CREATE TRIGGER ID.triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID.triggerBeforeAfterStmt triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID.triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID.triggerBeforeAfterStmt triggerForEachEnum triggerExecStmt 
+
+	BEFORE  shift 189
+	AFTER  shift 190
+	INSTEAD  shift 191
+	.  error
+
+	triggerBeforeAfterStmt  goto 188
+
+state 135
+	createPsmStmt:  CREATE PROCEDURE ID.LPAREN psmParameterList RPAREN psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE ID.LPAREN psmParameterList RPAREN psmBody 
+	createPsmStmt:  CREATE PROCEDURE ID.psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE ID.psmBody 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	LPAREN  shift 192
+	.  error
+
+	psmLocalDeclarationList  goto 193
+	psmLocalDeclarationEntry  goto 195
+	psmBody  goto 194
+
+state 136
+	createPsmStmt:  CREATE FUNCTION ID.LPAREN psmParameterList RPAREN RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID.LPAREN psmParameterList RPAREN RETURNS domain psmBody 
+	createPsmStmt:  CREATE FUNCTION ID.RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID.RETURNS domain psmBody 
+
+	RETURNS  shift 199
+	LPAREN  shift 198
+	.  error
+
+
+state 137
+	alterTableAddStmt:  ALTER TABLE ID.ADD attributeDeclaration SEMICOLON 
+	alterTableAddStmt:  ALTER TABLE ID.ADD constraintWithName SEMICOLON 
+	alterTableDropStmt:  ALTER TABLE ID.DROP ID SEMICOLON 
+	alterTableDropStmt:  ALTER TABLE ID.DROP CONSTRAINT ID SEMICOLON 
+
+	DROP  shift 201
+	ADD  shift 200
+	.  error
+
+
+state 138
+	deleteStmt:  DELETE FROM ID.WHERE condition SEMICOLON 
+
+	WHERE  shift 202
+	.  error
+
+
+state 139
+	insertStmt:  INSERTINTO ID VALUES.subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID VALUES.LPAREN elementaryValueList RPAREN SEMICOLON 
+
+	LPAREN  shift 204
+	.  error
+
+	subQuery  goto 203
+
+state 140
+	insertStmt:  INSERTINTO ID LPAREN.attriNameList RPAREN VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID LPAREN.attriNameList RPAREN VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+
+	ID  shift 206
+	.  error
+
+	attriNameList  goto 205
+
+state 141
+	updateStmt:  UPDATE ID SET.updateList WHERE condition SEMICOLON 
+
+	ID  shift 209
+	.  error
+
+	updateList  goto 207
+	updateListEntry  goto 208
+
+state 142
+	logUserStmt:  CONNECT AS USER.ID PASSWORD PASSWORDS SEMICOLON 
+	logUserStmt:  CONNECT AS USER.ID PASSWORD ID SEMICOLON 
+	logUserStmt:  CONNECT AS USER.ID PASSWORD INTVALUE SEMICOLON 
+
+	ID  shift 210
+	.  error
+
+
+state 143
+	dqlEntry:  LPAREN dqlEntry RPAREN.    (26)
+
+	.  reduce 26 (src line 758)
+
+
+state 144
+	psmCall:  CALL ID LPAREN.psmValueList RPAREN 
+	psmCall:  CALL ID LPAREN.RPAREN 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	CALL  shift 44
+	LPAREN  shift 105
+	RPAREN  shift 212
+	ID  shift 217
+	.  error
+
+	aggregation  goto 173
+	expression  goto 216
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 214
+	psmValue  goto 213
+	psmCall  goto 215
+	psmValueList  goto 211
+
+state 145
+	query:  selectStmt fromStmt WHERE.condition 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt fromStmt WHERE.condition ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE.condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE.condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE.condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 218
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 146
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY.attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 225
+	attriNameOptionTableNameList  goto 224
+
+state 147
+	query:  selectStmt fromStmt ORDERBY.orderByList 
+	query:  selectStmt fromStmt ORDERBY.orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByList  goto 226
+	orderByListEntry  goto 227
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 148
+	query:  selectStmt fromStmt LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 230
+	.  error
+
+
+state 149
+	fromStmt:  FROM joinStmt.    (64)
+
+	.  reduce 64 (src line 1730)
+
+
+state 150
+	fromStmt:  FROM fromList.    (65)
+	fromList:  fromList.COMMA fromListEntry 
+
+	COMMA  shift 231
+	.  reduce 65 (src line 1739)
+
+
+state 151
+	joinStmt:  ID.CROSS JOIN ID 
+	joinStmt:  ID.JOIN ID ON onList 
+	joinStmt:  ID.NATURAL JOIN ID 
+	joinStmt:  ID.NATURAL FULL OUTER JOIN ID 
+	joinStmt:  ID.NATURAL LEFT OUTER JOIN ID 
+	joinStmt:  ID.NATURAL RIGHT OUTER JOIN ID 
+	joinStmt:  ID.FULL OUTER JOIN ID ON onList 
+	joinStmt:  ID.LEFT OUTER JOIN ID ON onList 
+	joinStmt:  ID.RIGHT OUTER JOIN ID ON onList 
+	fromListEntry:  ID.    (80)
+	fromListEntry:  ID.ID 
+	fromListEntry:  ID.AS ID 
+
+	CROSS  shift 232
+	JOIN  shift 233
+	NATURAL  shift 234
+	FULL  shift 235
+	LEFT  shift 236
+	RIGHT  shift 237
+	AS  shift 239
+	ID  shift 238
+	.  reduce 80 (src line 1879)
+
+
+state 152
+	fromList:  fromListEntry.    (79)
+
+	.  reduce 79 (src line 1870)
+
+
+state 153
+	fromListEntry:  subQuery.    (83)
+	fromListEntry:  subQuery.ID 
+	fromListEntry:  subQuery.AS ID 
+
+	AS  shift 241
+	ID  shift 240
+	.  reduce 83 (src line 1910)
+
+
+state 154
+	subQuery:  LPAREN.query RPAREN 
+
+	SELECT  shift 46
+	.  error
+
+	query  goto 242
+	selectStmt  goto 45
+
+state 155
+	selectList:  selectList COMMA.selectListEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	selectListEntry  goto 243
+	aggregation  goto 95
+	expression  goto 96
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 94
+	elementaryValue  goto 104
+
+state 156
+	selectStmt:  SELECT DISTINCT selectList.    (55)
+	selectList:  selectList.COMMA selectListEntry 
+
+	COMMA  shift 155
+	.  reduce 55 (src line 1643)
+
+
+state 157
+	selectListEntry:  attriNameOptionTableName AS.ID 
+
+	ID  shift 244
+	.  error
+
+
+state 158
+	selectListEntry:  aggregation AS.ID 
+
+	ID  shift 245
+	.  error
+
+
+state 159
+	selectListEntry:  expression AS.ID 
+
+	ID  shift 246
+	.  error
+
+
+state 160
+	attriNameOptionTableName:  ID DOT.ID 
+
+	ID  shift 247
+	.  error
+
+
+state 161
+	aggregation:  SUM LPAREN.DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  SUM LPAREN.attriNameOptionTableName RPAREN 
+
+	DISTINCT  shift 248
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 249
+
+state 162
+	aggregation:  AVG LPAREN.DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  AVG LPAREN.attriNameOptionTableName RPAREN 
+
+	DISTINCT  shift 250
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 251
+
+state 163
+	aggregation:  MIN LPAREN.DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  MIN LPAREN.attriNameOptionTableName RPAREN 
+
+	DISTINCT  shift 252
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 253
+
+state 164
+	aggregation:  MAX LPAREN.DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  MAX LPAREN.attriNameOptionTableName RPAREN 
+
+	DISTINCT  shift 254
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 255
+
+state 165
+	aggregation:  COUNT LPAREN.DISTINCT attriNameOptionTableName RPAREN 
+	aggregation:  COUNT LPAREN.attriNameOptionTableName RPAREN 
+	aggregation:  COUNT LPAREN.STAR RPAREN 
+
+	STAR  shift 258
+	DISTINCT  shift 256
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 257
+
+state 166
+	expression:  expressionEntry PLUS.expressionEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	aggregation  goto 173
+	expression  goto 260
+	expressionEntry  goto 259
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 104
+
+state 167
+	expression:  expressionEntry SUBTRACT.expressionEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	aggregation  goto 173
+	expression  goto 260
+	expressionEntry  goto 261
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 104
+
+state 168
+	expression:  expressionEntry STAR.expressionEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	aggregation  goto 173
+	expression  goto 260
+	expressionEntry  goto 262
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 104
+
+state 169
+	expression:  expressionEntry DIVISION.expressionEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	aggregation  goto 173
+	expression  goto 260
+	expressionEntry  goto 263
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 104
+
+state 170
+	expression:  expressionEntry CONCATENATION.expressionEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	aggregation  goto 173
+	expression  goto 260
+	expressionEntry  goto 264
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 104
+
+state 171
+	expressionEntry:  expression.    (226)
+	expressionEntry:  LPAREN expression.RPAREN 
+
+	RPAREN  shift 265
+	.  reduce 226 (src line 3664)
+
+
+state 172
+	expressionEntry:  attriNameOptionTableName.    (224)
+
+	.  reduce 224 (src line 3646)
+
+
+state 173
+	expressionEntry:  aggregation.    (225)
+
+	.  reduce 225 (src line 3655)
+
+
+state 174
+	dcl:  DROP USER ID SEMICOLON.    (109)
+
+	.  reduce 109 (src line 2147)
+
+
+state 175
+	dropTableStmt:  DROP TABLE ID SEMICOLON.    (134)
+
+	.  reduce 134 (src line 2496)
+
+
+state 176
+	dropAssertStmt:  DROP ASSERTION ID SEMICOLON.    (140)
+
+	.  reduce 140 (src line 2598)
+
+
+state 177
+	dropViewStmt:  DROP VIEW ID SEMICOLON.    (143)
+
+	.  reduce 143 (src line 2647)
+
+
+state 178
+	dropIndexStmt:  DROP INDEX ID SEMICOLON.    (145)
+
+	.  reduce 145 (src line 2685)
+
+
+state 179
+	dropTriggerStmt:  DROP TRIGGER ID SEMICOLON.    (174)
+
+	.  reduce 174 (src line 3033)
+
+
+state 180
+	dropPsmStmt:  DROP FUNCTION ID SEMICOLON.    (211)
+
+	.  reduce 211 (src line 3489)
+
+
+state 181
+	dropPsmStmt:  DROP PROCEDURE ID SEMICOLON.    (212)
+
+	.  reduce 212 (src line 3498)
+
+
+state 182
+	createUserStmt:  CREATE USER ID PASSWORD.PASSWORDS SEMICOLON 
+	createUserStmt:  CREATE USER ID PASSWORD.ID SEMICOLON 
+	createUserStmt:  CREATE USER ID PASSWORD.INTVALUE SEMICOLON 
+
+	PASSWORDS  shift 266
+	INTVALUE  shift 268
+	ID  shift 267
+	.  error
+
+
+state 183
+	createTableStmt:  CREATE TABLE ID LPAREN.attributeDeclarationList RPAREN SEMICOLON 
+	createTableStmt:  CREATE TABLE ID LPAREN.attributeDeclarationList COMMA constraintList RPAREN SEMICOLON 
+
+	ID  shift 271
+	.  error
+
+	attributeDeclarationList  goto 269
+	attributeDeclaration  goto 270
+
+state 184
+	createAssertStmt:  CREATE ASSERTION ID CHECK.LPAREN condition RPAREN SEMICOLON 
+
+	LPAREN  shift 272
+	.  error
+
+
+state 185
+	createViewStmt:  CREATE VIEW ID AS.subQuery SEMICOLON 
+
+	LPAREN  shift 154
+	.  error
+
+	subQuery  goto 273
+
+state 186
+	createViewStmt:  CREATE VIEW ID LPAREN.attriNameList RPAREN AS subQuery SEMICOLON 
+
+	ID  shift 206
+	.  error
+
+	attriNameList  goto 274
+
+state 187
+	createIndexStmt:  CREATE INDEX ID ON.ID LPAREN attriNameList RPAREN SEMICOLON 
+
+	ID  shift 275
+	.  error
+
+
+state 188
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt.REFERENCING triggerOldNewList triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt.triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt.REFERENCING triggerOldNewList triggerForEachEnum triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt.triggerForEachEnum triggerExecStmt 
+
+	REFERENCING  shift 276
+	FOR  shift 278
+	.  error
+
+	triggerForEachEnum  goto 277
+
+state 189
+	triggerBeforeAfterStmt:  BEFORE.UPDATE ON ID 
+	triggerBeforeAfterStmt:  BEFORE.UPDATE OF ID ON ID 
+	triggerBeforeAfterStmt:  BEFORE.INSERT ON ID 
+	triggerBeforeAfterStmt:  BEFORE.DELETE ON ID 
+
+	UPDATE  shift 279
+	INSERT  shift 280
+	DELETE  shift 281
+	.  error
+
+
+state 190
+	triggerBeforeAfterStmt:  AFTER.UPDATE ON ID 
+	triggerBeforeAfterStmt:  AFTER.UPDATE OF ID ON ID 
+	triggerBeforeAfterStmt:  AFTER.INSERT ON ID 
+	triggerBeforeAfterStmt:  AFTER.DELETE ON ID 
+
+	UPDATE  shift 282
+	INSERT  shift 283
+	DELETE  shift 284
+	.  error
+
+
+state 191
+	triggerBeforeAfterStmt:  INSTEAD.OF UPDATE ON ID 
+	triggerBeforeAfterStmt:  INSTEAD.OF UPDATE OF ID ON ID 
+	triggerBeforeAfterStmt:  INSTEAD.OF INSERT ON ID 
+	triggerBeforeAfterStmt:  INSTEAD.OF DELETE ON ID 
+
+	OF  shift 285
+	.  error
+
+
+state 192
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN.psmParameterList RPAREN psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN.psmParameterList RPAREN psmBody 
+
+	IN  shift 288
+	OUT  shift 289
+	INOUT  shift 290
+	.  error
+
+	psmParameterList  goto 286
+	psmParameterEntry  goto 287
+
+state 193
+	createPsmStmt:  CREATE PROCEDURE ID psmLocalDeclarationList.psmBody 
+	psmLocalDeclarationList:  psmLocalDeclarationList.psmLocalDeclarationEntry 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationEntry  goto 292
+	psmBody  goto 291
+
+state 194
+	createPsmStmt:  CREATE PROCEDURE ID psmBody.    (178)
+
+	.  reduce 178 (src line 3151)
+
+
+state 195
+	psmLocalDeclarationList:  psmLocalDeclarationEntry.    (189)
+
+	.  reduce 189 (src line 3265)
+
+
+state 196
+	psmBody:  BEGINTOKEN.psmExecList END SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecList  goto 293
+	psmExecEntry  goto 294
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 197
+	psmLocalDeclarationEntry:  DECLARE.ID domain SEMICOLON 
+
+	ID  shift 302
+	.  error
+
+
+state 198
+	createPsmStmt:  CREATE FUNCTION ID LPAREN.psmParameterList RPAREN RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID LPAREN.psmParameterList RPAREN RETURNS domain psmBody 
+
+	IN  shift 288
+	OUT  shift 289
+	INOUT  shift 290
+	.  error
+
+	psmParameterList  goto 303
+	psmParameterEntry  goto 287
+
+state 199
+	createPsmStmt:  CREATE FUNCTION ID RETURNS.domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID RETURNS.domain psmBody 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 304
+
+state 200
+	alterTableAddStmt:  ALTER TABLE ID ADD.attributeDeclaration SEMICOLON 
+	alterTableAddStmt:  ALTER TABLE ID ADD.constraintWithName SEMICOLON 
+
+	CONSTRAINT  shift 321
+	ID  shift 271
+	.  error
+
+	attributeDeclaration  goto 319
+	constraintWithName  goto 320
+
+state 201
+	alterTableDropStmt:  ALTER TABLE ID DROP.ID SEMICOLON 
+	alterTableDropStmt:  ALTER TABLE ID DROP.CONSTRAINT ID SEMICOLON 
+
+	CONSTRAINT  shift 323
+	ID  shift 322
+	.  error
+
+
+state 202
+	deleteStmt:  DELETE FROM ID WHERE.condition SEMICOLON 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 324
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 203
+	insertStmt:  INSERTINTO ID VALUES subQuery.SEMICOLON 
+
+	SEMICOLON  shift 325
+	.  error
+
+
+state 204
+	subQuery:  LPAREN.query RPAREN 
+	insertStmt:  INSERTINTO ID VALUES LPAREN.elementaryValueList RPAREN SEMICOLON 
+
+	SELECT  shift 46
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	.  error
+
+	query  goto 242
+	selectStmt  goto 45
+	elementaryValueList  goto 326
+	elementaryValue  goto 327
+
+state 205
+	insertStmt:  INSERTINTO ID LPAREN attriNameList.RPAREN VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID LPAREN attriNameList.RPAREN VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+	attriNameList:  attriNameList.COMMA ID 
+
+	RPAREN  shift 328
+	COMMA  shift 329
+	.  error
+
+
+state 206
+	attriNameList:  ID.    (336)
+
+	.  reduce 336 (src line 4861)
+
+
+state 207
+	updateStmt:  UPDATE ID SET updateList.WHERE condition SEMICOLON 
+	updateList:  updateList.COMMA updateListEntry 
+
+	WHERE  shift 330
+	COMMA  shift 331
+	.  error
+
+
+state 208
+	updateList:  updateListEntry.    (125)
+
+	.  reduce 125 (src line 2355)
+
+
+state 209
+	updateListEntry:  ID.EQUAL elementaryValue 
+
+	EQUAL  shift 332
+	.  error
+
+
+state 210
+	logUserStmt:  CONNECT AS USER ID.PASSWORD PASSWORDS SEMICOLON 
+	logUserStmt:  CONNECT AS USER ID.PASSWORD ID SEMICOLON 
+	logUserStmt:  CONNECT AS USER ID.PASSWORD INTVALUE SEMICOLON 
+
+	PASSWORD  shift 333
+	.  error
+
+
+state 211
+	psmCall:  CALL ID LPAREN psmValueList.RPAREN 
+	psmValueList:  psmValueList.COMMA psmValue 
+
+	RPAREN  shift 334
+	COMMA  shift 335
+	.  error
+
+
+state 212
+	psmCall:  CALL ID LPAREN RPAREN.    (215)
+
+	.  reduce 215 (src line 3543)
+
+
+state 213
+	psmValueList:  psmValue.    (217)
+
+	.  reduce 217 (src line 3559)
+
+
+state 214
+	psmValue:  elementaryValue.    (207)
+	expressionEntry:  elementaryValue.    (223)
+
+	SEMICOLON  reduce 207 (src line 3445)
+	RPAREN  reduce 207 (src line 3445)
+	COMMA  reduce 207 (src line 3445)
+	.  reduce 223 (src line 3636)
+
+
+state 215
+	psmValue:  psmCall.    (208)
+
+	.  reduce 208 (src line 3454)
+
+
+state 216
+	psmValue:  expression.    (209)
+	expressionEntry:  expression.    (226)
+
+	SEMICOLON  reduce 209 (src line 3462)
+	RPAREN  reduce 209 (src line 3462)
+	COMMA  reduce 209 (src line 3462)
+	.  reduce 226 (src line 3664)
+
+
+state 217
+	psmValue:  ID.    (210)
+	attriNameOptionTableName:  ID.    (329)
+	attriNameOptionTableName:  ID.DOT ID 
+
+	SEMICOLON  reduce 210 (src line 3470)
+	DOT  shift 160
+	RPAREN  reduce 210 (src line 3470)
+	COMMA  reduce 210 (src line 3470)
+	.  reduce 329 (src line 4781)
+
+
+state 218
+	query:  selectStmt fromStmt WHERE condition.    (30)
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt fromStmt WHERE condition.ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition.LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition.ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition.GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	GROUPBY  shift 336
+	ORDERBY  shift 337
+	LIMIT  shift 338
+	AND  shift 339
+	OR  shift 340
+	.  reduce 30 (src line 902)
+
+
+state 219
+	condition:  predicate.    (282)
+
+	.  reduce 282 (src line 4300)
+
+
+state 220
+	condition:  LPAREN.condition RPAREN 
+	predicate:  LPAREN.attriNameOptionTableNameList RPAREN IN subQuery 
+	predicate:  LPAREN.attriNameOptionTableNameList RPAREN NOT IN subQuery 
+	predicate:  LPAREN.attriNameOptionTableNameList RPAREN IN ID 
+	predicate:  LPAREN.attriNameOptionTableNameList RPAREN NOT IN ID 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 341
+	predicate  goto 219
+	attriNameOptionTableName  goto 343
+	attriNameOptionTableNameList  goto 342
+
+state 221
+	predicate:  attriNameOptionTableName.compareMark elementaryValue 
+	predicate:  attriNameOptionTableName.LIKE STRINGVALUE 
+	predicate:  attriNameOptionTableName.IN subQuery 
+	predicate:  attriNameOptionTableName.NOT IN subQuery 
+	predicate:  attriNameOptionTableName.IN ID 
+	predicate:  attriNameOptionTableName.NOT IN ID 
+	predicate:  attriNameOptionTableName.compareMark ALL subQuery 
+	predicate:  attriNameOptionTableName.compareMark ANY subQuery 
+	predicate:  attriNameOptionTableName.compareMark ALL ID 
+	predicate:  attriNameOptionTableName.compareMark ANY ID 
+	predicate:  attriNameOptionTableName.IS NULLMARK 
+	predicate:  attriNameOptionTableName.IS NOT NULLMARK 
+
+	LIKE  shift 345
+	IN  shift 346
+	IS  shift 348
+	NOTEQUAL  shift 350
+	LESS  shift 351
+	GREATER  shift 352
+	LESSEQUAL  shift 353
+	GREATEREQUAL  shift 354
+	EQUAL  shift 349
+	NOT  shift 347
+	.  error
+
+	compareMark  goto 344
+
+state 222
+	predicate:  NOT.attriNameOptionTableName compareMark ALL subQuery 
+	predicate:  NOT.attriNameOptionTableName compareMark ANY subQuery 
+	predicate:  NOT.attriNameOptionTableName compareMark ALL ID 
+	predicate:  NOT.attriNameOptionTableName compareMark ANY ID 
+	predicate:  NOT.EXISTS subQuery 
+
+	EXISTS  shift 356
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 355
+
+state 223
+	predicate:  EXISTS.subQuery 
+
+	LPAREN  shift 154
+	.  error
+
+	subQuery  goto 357
+
+state 224
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.    (31)
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.HAVING condition 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.ORDERBY orderByList 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList.HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	attriNameOptionTableNameList:  attriNameOptionTableNameList.COMMA attriNameOptionTableName 
+
+	HAVING  shift 358
+	ORDERBY  shift 359
+	LIMIT  shift 360
+	COMMA  shift 361
+	.  reduce 31 (src line 929)
+
+
+state 225
+	attriNameOptionTableNameList:  attriNameOptionTableName.    (338)
+
+	.  reduce 338 (src line 4872)
+
+
+state 226
+	query:  selectStmt fromStmt ORDERBY orderByList.    (35)
+	query:  selectStmt fromStmt ORDERBY orderByList.LIMIT INTVALUE COMMA INTVALUE 
+	orderByList:  orderByList.COMMA orderByListEntry 
+
+	LIMIT  shift 362
+	COMMA  shift 363
+	.  reduce 35 (src line 1046)
+
+
+state 227
+	orderByList:  orderByListEntry.    (87)
+
+	.  reduce 87 (src line 1947)
+
+
+state 228
+	orderByListEntry:  attriNameOptionTableName.    (88)
+	orderByListEntry:  attriNameOptionTableName.ASC 
+	orderByListEntry:  attriNameOptionTableName.DESC 
+	expressionEntry:  attriNameOptionTableName.    (224)
+
+	ASC  shift 364
+	DESC  shift 365
+	STAR  reduce 224 (src line 3646)
+	PLUS  reduce 224 (src line 3646)
+	SUBTRACT  reduce 224 (src line 3646)
+	DIVISION  reduce 224 (src line 3646)
+	CONCATENATION  reduce 224 (src line 3646)
+	.  reduce 88 (src line 1956)
+
+
+state 229
+	orderByListEntry:  expression.    (91)
+	orderByListEntry:  expression.ASC 
+	orderByListEntry:  expression.DESC 
+	expressionEntry:  expression.    (226)
+
+	ASC  shift 366
+	DESC  shift 367
+	STAR  reduce 226 (src line 3664)
+	PLUS  reduce 226 (src line 3664)
+	SUBTRACT  reduce 226 (src line 3664)
+	DIVISION  reduce 226 (src line 3664)
+	CONCATENATION  reduce 226 (src line 3664)
+	.  reduce 91 (src line 1984)
+
+
+state 230
+	query:  selectStmt fromStmt LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 368
+	.  error
+
+
+state 231
+	fromList:  fromList COMMA.fromListEntry 
+
+	LPAREN  shift 154
+	ID  shift 370
+	.  error
+
+	subQuery  goto 153
+	fromListEntry  goto 369
+
+state 232
+	joinStmt:  ID CROSS.JOIN ID 
+
+	JOIN  shift 371
+	.  error
+
+
+state 233
+	joinStmt:  ID JOIN.ID ON onList 
+
+	ID  shift 372
+	.  error
+
+
+state 234
+	joinStmt:  ID NATURAL.JOIN ID 
+	joinStmt:  ID NATURAL.FULL OUTER JOIN ID 
+	joinStmt:  ID NATURAL.LEFT OUTER JOIN ID 
+	joinStmt:  ID NATURAL.RIGHT OUTER JOIN ID 
+
+	JOIN  shift 373
+	FULL  shift 374
+	LEFT  shift 375
+	RIGHT  shift 376
+	.  error
+
+
+state 235
+	joinStmt:  ID FULL.OUTER JOIN ID ON onList 
+
+	OUTER  shift 377
+	.  error
+
+
+state 236
+	joinStmt:  ID LEFT.OUTER JOIN ID ON onList 
+
+	OUTER  shift 378
+	.  error
+
+
+state 237
+	joinStmt:  ID RIGHT.OUTER JOIN ID ON onList 
+
+	OUTER  shift 379
+	.  error
+
+
+state 238
+	fromListEntry:  ID ID.    (81)
+
+	.  reduce 81 (src line 1890)
+
+
+state 239
+	fromListEntry:  ID AS.ID 
+
+	ID  shift 380
+	.  error
+
+
+state 240
+	fromListEntry:  subQuery ID.    (84)
+
+	.  reduce 84 (src line 1919)
+
+
+state 241
+	fromListEntry:  subQuery AS.ID 
+
+	ID  shift 381
+	.  error
+
+
+state 242
+	subQuery:  LPAREN query.RPAREN 
+
+	RPAREN  shift 382
+	.  error
+
+
+state 243
+	selectList:  selectList COMMA selectListEntry.    (57)
+
+	.  reduce 57 (src line 1662)
+
+
+state 244
+	selectListEntry:  attriNameOptionTableName AS ID.    (59)
+
+	.  reduce 59 (src line 1679)
+
+
+state 245
+	selectListEntry:  aggregation AS ID.    (61)
+
+	.  reduce 61 (src line 1698)
+
+
+state 246
+	selectListEntry:  expression AS ID.    (63)
+
+	.  reduce 63 (src line 1717)
+
+
+state 247
+	attriNameOptionTableName:  ID DOT ID.    (330)
+
+	.  reduce 330 (src line 4789)
+
+
+state 248
+	aggregation:  SUM LPAREN DISTINCT.attriNameOptionTableName RPAREN 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 383
+
+state 249
+	aggregation:  SUM LPAREN attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 384
+	.  error
+
+
+state 250
+	aggregation:  AVG LPAREN DISTINCT.attriNameOptionTableName RPAREN 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 385
+
+state 251
+	aggregation:  AVG LPAREN attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 386
+	.  error
+
+
+state 252
+	aggregation:  MIN LPAREN DISTINCT.attriNameOptionTableName RPAREN 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 387
+
+state 253
+	aggregation:  MIN LPAREN attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 388
+	.  error
+
+
+state 254
+	aggregation:  MAX LPAREN DISTINCT.attriNameOptionTableName RPAREN 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 389
+
+state 255
+	aggregation:  MAX LPAREN attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 390
+	.  error
+
+
+state 256
+	aggregation:  COUNT LPAREN DISTINCT.attriNameOptionTableName RPAREN 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 391
+
+state 257
+	aggregation:  COUNT LPAREN attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 392
+	.  error
+
+
+state 258
+	aggregation:  COUNT LPAREN STAR.RPAREN 
+
+	RPAREN  shift 393
+	.  error
+
+
+state 259
+	expression:  expressionEntry.PLUS expressionEntry 
+	expression:  expressionEntry PLUS expressionEntry.    (218)
+	expression:  expressionEntry.SUBTRACT expressionEntry 
+	expression:  expressionEntry.STAR expressionEntry 
+	expression:  expressionEntry.DIVISION expressionEntry 
+	expression:  expressionEntry.CONCATENATION expressionEntry 
+
+	.  reduce 218 (src line 3587)
+
+
+state 260
+	expressionEntry:  expression.    (226)
+
+	.  reduce 226 (src line 3664)
+
+
+state 261
+	expression:  expressionEntry.PLUS expressionEntry 
+	expression:  expressionEntry.SUBTRACT expressionEntry 
+	expression:  expressionEntry SUBTRACT expressionEntry.    (219)
+	expression:  expressionEntry.STAR expressionEntry 
+	expression:  expressionEntry.DIVISION expressionEntry 
+	expression:  expressionEntry.CONCATENATION expressionEntry 
+
+	.  reduce 219 (src line 3597)
+
+
+state 262
+	expression:  expressionEntry.PLUS expressionEntry 
+	expression:  expressionEntry.SUBTRACT expressionEntry 
+	expression:  expressionEntry.STAR expressionEntry 
+	expression:  expressionEntry STAR expressionEntry.    (220)
+	expression:  expressionEntry.DIVISION expressionEntry 
+	expression:  expressionEntry.CONCATENATION expressionEntry 
+
+	.  reduce 220 (src line 3606)
+
+
+state 263
+	expression:  expressionEntry.PLUS expressionEntry 
+	expression:  expressionEntry.SUBTRACT expressionEntry 
+	expression:  expressionEntry.STAR expressionEntry 
+	expression:  expressionEntry.DIVISION expressionEntry 
+	expression:  expressionEntry DIVISION expressionEntry.    (221)
+	expression:  expressionEntry.CONCATENATION expressionEntry 
+
+	.  reduce 221 (src line 3615)
+
+
+state 264
+	expression:  expressionEntry.PLUS expressionEntry 
+	expression:  expressionEntry.SUBTRACT expressionEntry 
+	expression:  expressionEntry.STAR expressionEntry 
+	expression:  expressionEntry.DIVISION expressionEntry 
+	expression:  expressionEntry.CONCATENATION expressionEntry 
+	expression:  expressionEntry CONCATENATION expressionEntry.    (222)
+
+	.  reduce 222 (src line 3624)
+
+
+state 265
+	expressionEntry:  LPAREN expression RPAREN.    (227)
+
+	.  reduce 227 (src line 3673)
+
+
+state 266
+	createUserStmt:  CREATE USER ID PASSWORD PASSWORDS.SEMICOLON 
+
+	SEMICOLON  shift 394
+	.  error
+
+
+state 267
+	createUserStmt:  CREATE USER ID PASSWORD ID.SEMICOLON 
+
+	SEMICOLON  shift 395
+	.  error
+
+
+state 268
+	createUserStmt:  CREATE USER ID PASSWORD INTVALUE.SEMICOLON 
+
+	SEMICOLON  shift 396
+	.  error
+
+
+state 269
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList.RPAREN SEMICOLON 
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList.COMMA constraintList RPAREN SEMICOLON 
+	attributeDeclarationList:  attributeDeclarationList.COMMA attributeDeclaration 
+
+	RPAREN  shift 397
+	COMMA  shift 398
+	.  error
+
+
+state 270
+	attributeDeclarationList:  attributeDeclaration.    (130)
+
+	.  reduce 130 (src line 2437)
+
+
+state 271
+	attributeDeclaration:  ID.domain 
+	attributeDeclaration:  ID.domain constraintAfterAttributeList 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 399
+
+state 272
+	createAssertStmt:  CREATE ASSERTION ID CHECK LPAREN.condition RPAREN SEMICOLON 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 400
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 273
+	createViewStmt:  CREATE VIEW ID AS subQuery.SEMICOLON 
+
+	SEMICOLON  shift 401
+	.  error
+
+
+state 274
+	createViewStmt:  CREATE VIEW ID LPAREN attriNameList.RPAREN AS subQuery SEMICOLON 
+	attriNameList:  attriNameList.COMMA ID 
+
+	RPAREN  shift 402
+	COMMA  shift 329
+	.  error
+
+
+state 275
+	createIndexStmt:  CREATE INDEX ID ON ID.LPAREN attriNameList RPAREN SEMICOLON 
+
+	LPAREN  shift 403
+	.  error
+
+
+state 276
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING.triggerOldNewList triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING.triggerOldNewList triggerForEachEnum triggerExecStmt 
+
+	OLD  shift 406
+	NEW  shift 407
+	.  error
+
+	triggerOldNewList  goto 404
+	oldNewEntry  goto 405
+
+state 277
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum.triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum.triggerExecStmt 
+
+	WHEN  shift 410
+	BEGINTOKEN  shift 411
+	.  error
+
+	triggerWhenCondition  goto 408
+	triggerExecStmt  goto 409
+
+state 278
+	triggerForEachEnum:  FOR.EACH ROW 
+	triggerForEachEnum:  FOR.EACH STATEMENT 
+
+	EACH  shift 412
+	.  error
+
+
+state 279
+	triggerBeforeAfterStmt:  BEFORE UPDATE.ON ID 
+	triggerBeforeAfterStmt:  BEFORE UPDATE.OF ID ON ID 
+
+	ON  shift 413
+	OF  shift 414
+	.  error
+
+
+state 280
+	triggerBeforeAfterStmt:  BEFORE INSERT.ON ID 
+
+	ON  shift 415
+	.  error
+
+
+state 281
+	triggerBeforeAfterStmt:  BEFORE DELETE.ON ID 
+
+	ON  shift 416
+	.  error
+
+
+state 282
+	triggerBeforeAfterStmt:  AFTER UPDATE.ON ID 
+	triggerBeforeAfterStmt:  AFTER UPDATE.OF ID ON ID 
+
+	ON  shift 417
+	OF  shift 418
+	.  error
+
+
+state 283
+	triggerBeforeAfterStmt:  AFTER INSERT.ON ID 
+
+	ON  shift 419
+	.  error
+
+
+state 284
+	triggerBeforeAfterStmt:  AFTER DELETE.ON ID 
+
+	ON  shift 420
+	.  error
+
+
+state 285
+	triggerBeforeAfterStmt:  INSTEAD OF.UPDATE ON ID 
+	triggerBeforeAfterStmt:  INSTEAD OF.UPDATE OF ID ON ID 
+	triggerBeforeAfterStmt:  INSTEAD OF.INSERT ON ID 
+	triggerBeforeAfterStmt:  INSTEAD OF.DELETE ON ID 
+
+	UPDATE  shift 421
+	INSERT  shift 422
+	DELETE  shift 423
+	.  error
+
+
+state 286
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList.RPAREN psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList.RPAREN psmBody 
+	psmParameterList:  psmParameterList.COMMA psmParameterEntry 
+
+	RPAREN  shift 424
+	COMMA  shift 425
+	.  error
+
+
+state 287
+	psmParameterList:  psmParameterEntry.    (184)
+
+	.  reduce 184 (src line 3218)
+
+
+state 288
+	psmParameterEntry:  IN.ID domain 
+
+	ID  shift 426
+	.  error
+
+
+state 289
+	psmParameterEntry:  OUT.ID domain 
+
+	ID  shift 427
+	.  error
+
+
+state 290
+	psmParameterEntry:  INOUT.ID domain 
+
+	ID  shift 428
+	.  error
+
+
+state 291
+	createPsmStmt:  CREATE PROCEDURE ID psmLocalDeclarationList psmBody.    (177)
+
+	.  reduce 177 (src line 3139)
+
+
+state 292
+	psmLocalDeclarationList:  psmLocalDeclarationList psmLocalDeclarationEntry.    (188)
+
+	.  reduce 188 (src line 3260)
+
+
+state 293
+	psmBody:  BEGINTOKEN psmExecList.END SEMICOLON 
+	psmExecList:  psmExecList.psmExecEntry 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	END  shift 429
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecEntry  goto 430
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 294
+	psmExecList:  psmExecEntry.    (193)
+
+	.  reduce 193 (src line 3299)
+
+
+state 295
+	psmExecEntry:  RETURN.psmValue SEMICOLON 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	CALL  shift 44
+	LPAREN  shift 105
+	ID  shift 217
+	.  error
+
+	aggregation  goto 173
+	expression  goto 216
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 214
+	psmValue  goto 431
+	psmCall  goto 215
+
+state 296
+	psmExecEntry:  SET.ID EQUAL psmValue SEMICOLON 
+
+	ID  shift 432
+	.  error
+
+
+state 297
+	psmExecEntry:  psmForLoop.    (196)
+
+	.  reduce 196 (src line 3326)
+
+
+state 298
+	psmExecEntry:  psmBranch.    (197)
+
+	.  reduce 197 (src line 3334)
+
+
+state 299
+	psmExecEntry:  dml.    (198)
+
+	.  reduce 198 (src line 3342)
+
+
+state 300
+	psmForLoop:  FOR.ID AS ID CURSOR FOR subQuery DO psmExecList END FOR SEMICOLON 
+
+	ID  shift 433
+	.  error
+
+
+state 301
+	psmBranch:  IF.condition THEN psmExecList psmElseifList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF.condition THEN psmExecList psmElseifList END IF SEMICOLON 
+	psmBranch:  IF.condition THEN psmExecList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF.condition THEN psmExecList END IF SEMICOLON 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 434
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 302
+	psmLocalDeclarationEntry:  DECLARE ID.domain SEMICOLON 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 435
+
+state 303
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList.RPAREN RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList.RPAREN RETURNS domain psmBody 
+	psmParameterList:  psmParameterList.COMMA psmParameterEntry 
+
+	RPAREN  shift 436
+	COMMA  shift 425
+	.  error
+
+
+state 304
+	createPsmStmt:  CREATE FUNCTION ID RETURNS domain.psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID RETURNS domain.psmBody 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationList  goto 437
+	psmLocalDeclarationEntry  goto 195
+	psmBody  goto 438
+
+state 305
+	domain:  CHAR.    (314)
+
+	.  reduce 314 (src line 4657)
+
+
+state 306
+	domain:  VARCHAR.LPAREN INTVALUE RPAREN 
+
+	LPAREN  shift 439
+	.  error
+
+
+state 307
+	domain:  BIT.LPAREN INTVALUE RPAREN 
+
+	LPAREN  shift 440
+	.  error
+
+
+state 308
+	domain:  BITVARYING.LPAREN INTVALUE RPAREN 
+
+	LPAREN  shift 441
+	.  error
+
+
+state 309
+	domain:  BOOLEAN.    (318)
+
+	.  reduce 318 (src line 4689)
+
+
+state 310
+	domain:  INT.    (319)
+
+	.  reduce 319 (src line 4696)
+
+
+state 311
+	domain:  INTEGER.    (320)
+
+	.  reduce 320 (src line 4703)
+
+
+state 312
+	domain:  SHORTINT.    (321)
+
+	.  reduce 321 (src line 4710)
+
+
+state 313
+	domain:  FLOAT.    (322)
+
+	.  reduce 322 (src line 4717)
+
+
+state 314
+	domain:  REAL.    (323)
+
+	.  reduce 323 (src line 4724)
+
+
+state 315
+	domain:  DOUBLEPRECISION.    (324)
+
+	.  reduce 324 (src line 4731)
+
+
+state 316
+	domain:  DECIMAL.LPAREN INTVALUE COMMA INTVALUE RPAREN 
+
+	LPAREN  shift 442
+	.  error
+
+
+state 317
+	domain:  NUMERIC.LPAREN INTVALUE COMMA INTVALUE RPAREN $$326 DATE 
+
+	LPAREN  shift 443
+	.  error
+
+
+state 318
+	domain:  TIME.    (328)
+
+	.  reduce 328 (src line 4763)
+
+
+state 319
+	alterTableAddStmt:  ALTER TABLE ID ADD attributeDeclaration.SEMICOLON 
+
+	SEMICOLON  shift 444
+	.  error
+
+
+state 320
+	alterTableAddStmt:  ALTER TABLE ID ADD constraintWithName.SEMICOLON 
+
+	SEMICOLON  shift 445
+	.  error
+
+
+state 321
+	constraintWithName:  CONSTRAINT.ID constraint 
+
+	ID  shift 446
+	.  error
+
+
+state 322
+	alterTableDropStmt:  ALTER TABLE ID DROP ID.SEMICOLON 
+
+	SEMICOLON  shift 447
+	.  error
+
+
+state 323
+	alterTableDropStmt:  ALTER TABLE ID DROP CONSTRAINT.ID SEMICOLON 
+
+	ID  shift 448
+	.  error
+
+
+state 324
+	deleteStmt:  DELETE FROM ID WHERE condition.SEMICOLON 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	SEMICOLON  shift 449
+	AND  shift 339
+	OR  shift 340
+	.  error
+
+
+state 325
+	insertStmt:  INSERTINTO ID VALUES subQuery SEMICOLON.    (118)
+
+	.  reduce 118 (src line 2262)
+
+
+state 326
+	insertStmt:  INSERTINTO ID VALUES LPAREN elementaryValueList.RPAREN SEMICOLON 
+	elementaryValueList:  elementaryValueList.COMMA elementaryValue 
+
+	RPAREN  shift 450
+	COMMA  shift 451
+	.  error
+
+
+state 327
+	elementaryValueList:  elementaryValue.    (123)
+
+	.  reduce 123 (src line 2317)
+
+
+state 328
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN.VALUES subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN.VALUES LPAREN elementaryValueList RPAREN SEMICOLON 
+
+	VALUES  shift 452
+	.  error
+
+
+state 329
+	attriNameList:  attriNameList COMMA.ID 
+
+	ID  shift 453
+	.  error
+
+
+state 330
+	updateStmt:  UPDATE ID SET updateList WHERE.condition SEMICOLON 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 454
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 331
+	updateList:  updateList COMMA.updateListEntry 
+
+	ID  shift 209
+	.  error
+
+	updateListEntry  goto 455
+
+state 332
+	updateListEntry:  ID EQUAL.elementaryValue 
+
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	.  error
+
+	elementaryValue  goto 456
+
+state 333
+	logUserStmt:  CONNECT AS USER ID PASSWORD.PASSWORDS SEMICOLON 
+	logUserStmt:  CONNECT AS USER ID PASSWORD.ID SEMICOLON 
+	logUserStmt:  CONNECT AS USER ID PASSWORD.INTVALUE SEMICOLON 
+
+	PASSWORDS  shift 457
+	INTVALUE  shift 459
+	ID  shift 458
+	.  error
+
+
+state 334
+	psmCall:  CALL ID LPAREN psmValueList RPAREN.    (214)
+
+	.  reduce 214 (src line 3533)
+
+
+state 335
+	psmValueList:  psmValueList COMMA.psmValue 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	CALL  shift 44
+	LPAREN  shift 105
+	ID  shift 217
+	.  error
+
+	aggregation  goto 173
+	expression  goto 216
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 214
+	psmValue  goto 460
+	psmCall  goto 215
+
+state 336
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList HAVING condition 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY.attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 225
+	attriNameOptionTableNameList  goto 461
+
+state 337
+	query:  selectStmt fromStmt WHERE condition ORDERBY.orderByList 
+	query:  selectStmt fromStmt WHERE condition ORDERBY.orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByList  goto 462
+	orderByListEntry  goto 227
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 338
+	query:  selectStmt fromStmt WHERE condition LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 463
+	.  error
+
+
+state 339
+	condition:  condition AND.condition 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 464
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 340
+	condition:  condition OR.condition 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 465
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 341
+	condition:  LPAREN condition.RPAREN 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	AND  shift 339
+	OR  shift 340
+	RPAREN  shift 466
+	.  error
+
+
+state 342
+	predicate:  LPAREN attriNameOptionTableNameList.RPAREN IN subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList.RPAREN NOT IN subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList.RPAREN IN ID 
+	predicate:  LPAREN attriNameOptionTableNameList.RPAREN NOT IN ID 
+	attriNameOptionTableNameList:  attriNameOptionTableNameList.COMMA attriNameOptionTableName 
+
+	RPAREN  shift 467
+	COMMA  shift 361
+	.  error
+
+
+state 343
+	predicate:  attriNameOptionTableName.compareMark elementaryValue 
+	predicate:  attriNameOptionTableName.LIKE STRINGVALUE 
+	predicate:  attriNameOptionTableName.IN subQuery 
+	predicate:  attriNameOptionTableName.NOT IN subQuery 
+	predicate:  attriNameOptionTableName.IN ID 
+	predicate:  attriNameOptionTableName.NOT IN ID 
+	predicate:  attriNameOptionTableName.compareMark ALL subQuery 
+	predicate:  attriNameOptionTableName.compareMark ANY subQuery 
+	predicate:  attriNameOptionTableName.compareMark ALL ID 
+	predicate:  attriNameOptionTableName.compareMark ANY ID 
+	predicate:  attriNameOptionTableName.IS NULLMARK 
+	predicate:  attriNameOptionTableName.IS NOT NULLMARK 
+	attriNameOptionTableNameList:  attriNameOptionTableName.    (338)
+
+	LIKE  shift 345
+	IN  shift 346
+	IS  shift 348
+	NOTEQUAL  shift 350
+	LESS  shift 351
+	GREATER  shift 352
+	LESSEQUAL  shift 353
+	GREATEREQUAL  shift 354
+	EQUAL  shift 349
+	NOT  shift 347
+	.  reduce 338 (src line 4872)
+
+	compareMark  goto 344
+
+state 344
+	predicate:  attriNameOptionTableName compareMark.elementaryValue 
+	predicate:  attriNameOptionTableName compareMark.ALL subQuery 
+	predicate:  attriNameOptionTableName compareMark.ANY subQuery 
+	predicate:  attriNameOptionTableName compareMark.ALL ID 
+	predicate:  attriNameOptionTableName compareMark.ANY ID 
+
+	ALL  shift 469
+	ANY  shift 470
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	.  error
+
+	elementaryValue  goto 468
+
+state 345
+	predicate:  attriNameOptionTableName LIKE.STRINGVALUE 
+
+	STRINGVALUE  shift 471
+	.  error
+
+
+state 346
+	predicate:  attriNameOptionTableName IN.subQuery 
+	predicate:  attriNameOptionTableName IN.ID 
+
+	LPAREN  shift 154
+	ID  shift 473
+	.  error
+
+	subQuery  goto 472
+
+state 347
+	predicate:  attriNameOptionTableName NOT.IN subQuery 
+	predicate:  attriNameOptionTableName NOT.IN ID 
+
+	IN  shift 474
+	.  error
+
+
+state 348
+	predicate:  attriNameOptionTableName IS.NULLMARK 
+	predicate:  attriNameOptionTableName IS.NOT NULLMARK 
+
+	NOT  shift 476
+	NULLMARK  shift 475
+	.  error
+
+
+state 349
+	compareMark:  EQUAL.    (308)
+
+	.  reduce 308 (src line 4602)
+
+
+state 350
+	compareMark:  NOTEQUAL.    (309)
+
+	.  reduce 309 (src line 4608)
+
+
+state 351
+	compareMark:  LESS.    (310)
+
+	.  reduce 310 (src line 4613)
+
+
+state 352
+	compareMark:  GREATER.    (311)
+
+	.  reduce 311 (src line 4618)
+
+
+state 353
+	compareMark:  LESSEQUAL.    (312)
+
+	.  reduce 312 (src line 4623)
+
+
+state 354
+	compareMark:  GREATEREQUAL.    (313)
+
+	.  reduce 313 (src line 4628)
+
+
+state 355
+	predicate:  NOT attriNameOptionTableName.compareMark ALL subQuery 
+	predicate:  NOT attriNameOptionTableName.compareMark ANY subQuery 
+	predicate:  NOT attriNameOptionTableName.compareMark ALL ID 
+	predicate:  NOT attriNameOptionTableName.compareMark ANY ID 
+
+	NOTEQUAL  shift 350
+	LESS  shift 351
+	GREATER  shift 352
+	LESSEQUAL  shift 353
+	GREATEREQUAL  shift 354
+	EQUAL  shift 349
+	.  error
+
+	compareMark  goto 477
+
+state 356
+	predicate:  NOT EXISTS.subQuery 
+
+	LPAREN  shift 154
+	.  error
+
+	subQuery  goto 478
+
+state 357
+	predicate:  EXISTS subQuery.    (306)
+
+	.  reduce 306 (src line 4581)
+
+
+state 358
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING.condition 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING.condition ORDERBY orderByList 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING.condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING.condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 479
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 359
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY.orderByList 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY.orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByList  goto 480
+	orderByListEntry  goto 227
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 360
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 481
+	.  error
+
+
+state 361
+	attriNameOptionTableNameList:  attriNameOptionTableNameList COMMA.attriNameOptionTableName 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 482
+
+state 362
+	query:  selectStmt fromStmt ORDERBY orderByList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 483
+	.  error
+
+
+state 363
+	orderByList:  orderByList COMMA.orderByListEntry 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByListEntry  goto 484
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 364
+	orderByListEntry:  attriNameOptionTableName ASC.    (89)
+
+	.  reduce 89 (src line 1966)
+
+
+state 365
+	orderByListEntry:  attriNameOptionTableName DESC.    (90)
+
+	.  reduce 90 (src line 1975)
+
+
+state 366
+	orderByListEntry:  expression ASC.    (92)
+
+	.  reduce 92 (src line 1993)
+
+
+state 367
+	orderByListEntry:  expression DESC.    (93)
+
+	.  reduce 93 (src line 2002)
+
+
+state 368
+	query:  selectStmt fromStmt LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 485
+	.  error
+
+
+state 369
+	fromList:  fromList COMMA fromListEntry.    (78)
+
+	.  reduce 78 (src line 1865)
+
+
+state 370
+	fromListEntry:  ID.    (80)
+	fromListEntry:  ID.ID 
+	fromListEntry:  ID.AS ID 
+
+	AS  shift 239
+	ID  shift 238
+	.  reduce 80 (src line 1879)
+
+
+state 371
+	joinStmt:  ID CROSS JOIN.ID 
+
+	ID  shift 486
+	.  error
+
+
+state 372
+	joinStmt:  ID JOIN ID.ON onList 
+
+	ON  shift 487
+	.  error
+
+
+state 373
+	joinStmt:  ID NATURAL JOIN.ID 
+
+	ID  shift 488
+	.  error
+
+
+state 374
+	joinStmt:  ID NATURAL FULL.OUTER JOIN ID 
+
+	OUTER  shift 489
+	.  error
+
+
+state 375
+	joinStmt:  ID NATURAL LEFT.OUTER JOIN ID 
+
+	OUTER  shift 490
+	.  error
+
+
+state 376
+	joinStmt:  ID NATURAL RIGHT.OUTER JOIN ID 
+
+	OUTER  shift 491
+	.  error
+
+
+state 377
+	joinStmt:  ID FULL OUTER.JOIN ID ON onList 
+
+	JOIN  shift 492
+	.  error
+
+
+state 378
+	joinStmt:  ID LEFT OUTER.JOIN ID ON onList 
+
+	JOIN  shift 493
+	.  error
+
+
+state 379
+	joinStmt:  ID RIGHT OUTER.JOIN ID ON onList 
+
+	JOIN  shift 494
+	.  error
+
+
+state 380
+	fromListEntry:  ID AS ID.    (82)
+
+	.  reduce 82 (src line 1900)
+
+
+state 381
+	fromListEntry:  subQuery AS ID.    (85)
+
+	.  reduce 85 (src line 1929)
+
+
+state 382
+	subQuery:  LPAREN query RPAREN.    (28)
+
+	.  reduce 28 (src line 870)
+
+
+state 383
+	aggregation:  SUM LPAREN DISTINCT attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 495
+	.  error
+
+
+state 384
+	aggregation:  SUM LPAREN attriNameOptionTableName RPAREN.    (229)
+
+	.  reduce 229 (src line 3712)
+
+
+state 385
+	aggregation:  AVG LPAREN DISTINCT attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 496
+	.  error
+
+
+state 386
+	aggregation:  AVG LPAREN attriNameOptionTableName RPAREN.    (231)
+
+	.  reduce 231 (src line 3730)
+
+
+state 387
+	aggregation:  MIN LPAREN DISTINCT attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 497
+	.  error
+
+
+state 388
+	aggregation:  MIN LPAREN attriNameOptionTableName RPAREN.    (233)
+
+	.  reduce 233 (src line 3748)
+
+
+state 389
+	aggregation:  MAX LPAREN DISTINCT attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 498
+	.  error
+
+
+state 390
+	aggregation:  MAX LPAREN attriNameOptionTableName RPAREN.    (235)
+
+	.  reduce 235 (src line 3766)
+
+
+state 391
+	aggregation:  COUNT LPAREN DISTINCT attriNameOptionTableName.RPAREN 
+
+	RPAREN  shift 499
+	.  error
+
+
+state 392
+	aggregation:  COUNT LPAREN attriNameOptionTableName RPAREN.    (237)
+
+	.  reduce 237 (src line 3784)
+
+
+state 393
+	aggregation:  COUNT LPAREN STAR RPAREN.    (238)
+
+	.  reduce 238 (src line 3793)
+
+
+state 394
+	createUserStmt:  CREATE USER ID PASSWORD PASSWORDS SEMICOLON.    (111)
+
+	.  reduce 111 (src line 2165)
+
+
+state 395
+	createUserStmt:  CREATE USER ID PASSWORD ID SEMICOLON.    (112)
+
+	.  reduce 112 (src line 2175)
+
+
+state 396
+	createUserStmt:  CREATE USER ID PASSWORD INTVALUE SEMICOLON.    (113)
+
+	.  reduce 113 (src line 2184)
+
+
+state 397
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList RPAREN.SEMICOLON 
+
+	SEMICOLON  shift 500
+	.  error
+
+
+state 398
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList COMMA.constraintList RPAREN SEMICOLON 
+	attributeDeclarationList:  attributeDeclarationList COMMA.attributeDeclaration 
+
+	UNIQUE  shift 505
+	PRIMARYKEY  shift 506
+	CHECK  shift 507
+	FOREIGNKEY  shift 508
+	CONSTRAINT  shift 321
+	ID  shift 271
+	.  error
+
+	attributeDeclaration  goto 502
+	constraintList  goto 501
+	constraint  goto 504
+	constraintWithName  goto 503
+
+state 399
+	attributeDeclaration:  ID domain.    (132)
+	attributeDeclaration:  ID domain.constraintAfterAttributeList 
+
+	DEFAULT  shift 513
+	UNIQUE  shift 514
+	PRIMARYKEY  shift 515
+	REFERENCES  shift 517
+	CONSTRAINT  shift 512
+	NOT  shift 516
+	.  reduce 132 (src line 2450)
+
+	constraintAfterAttributeList  goto 509
+	constraintAfterAttribute  goto 511
+	constraintAfterAttributeWithName  goto 510
+
+state 400
+	createAssertStmt:  CREATE ASSERTION ID CHECK LPAREN condition.RPAREN SEMICOLON 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	AND  shift 339
+	OR  shift 340
+	RPAREN  shift 518
+	.  error
+
+
+state 401
+	createViewStmt:  CREATE VIEW ID AS subQuery SEMICOLON.    (141)
+
+	.  reduce 141 (src line 2617)
+
+
+state 402
+	createViewStmt:  CREATE VIEW ID LPAREN attriNameList RPAREN.AS subQuery SEMICOLON 
+
+	AS  shift 519
+	.  error
+
+
+state 403
+	createIndexStmt:  CREATE INDEX ID ON ID LPAREN.attriNameList RPAREN SEMICOLON 
+
+	ID  shift 206
+	.  error
+
+	attriNameList  goto 520
+
+state 404
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList.triggerForEachEnum triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList.triggerForEachEnum triggerExecStmt 
+	triggerOldNewList:  triggerOldNewList.COMMA oldNewEntry 
+
+	FOR  shift 278
+	COMMA  shift 522
+	.  error
+
+	triggerForEachEnum  goto 521
+
+state 405
+	triggerOldNewList:  oldNewEntry.    (162)
+
+	.  reduce 162 (src line 2933)
+
+
+state 406
+	oldNewEntry:  OLD.ROW AS ID 
+	oldNewEntry:  OLD.TABLE AS ID 
+
+	TABLE  shift 524
+	ROW  shift 523
+	.  error
+
+
+state 407
+	oldNewEntry:  NEW.ROW AS ID 
+	oldNewEntry:  NEW.TABLE AS ID 
+
+	TABLE  shift 526
+	ROW  shift 525
+	.  error
+
+
+state 408
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum triggerWhenCondition.triggerExecStmt 
+
+	BEGINTOKEN  shift 411
+	.  error
+
+	triggerExecStmt  goto 527
+
+state 409
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum triggerExecStmt.    (149)
+
+	.  reduce 149 (src line 2808)
+
+
+state 410
+	triggerWhenCondition:  WHEN.condition 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 528
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 411
+	triggerExecStmt:  BEGINTOKEN.dmlList END SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	.  error
+
+	dml  goto 530
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	dmlList  goto 529
+
+state 412
+	triggerForEachEnum:  FOR EACH.ROW 
+	triggerForEachEnum:  FOR EACH.STATEMENT 
+
+	ROW  shift 531
+	STATEMENT  shift 532
+	.  error
+
+
+state 413
+	triggerBeforeAfterStmt:  BEFORE UPDATE ON.ID 
+
+	ID  shift 533
+	.  error
+
+
+state 414
+	triggerBeforeAfterStmt:  BEFORE UPDATE OF.ID ON ID 
+
+	ID  shift 534
+	.  error
+
+
+state 415
+	triggerBeforeAfterStmt:  BEFORE INSERT ON.ID 
+
+	ID  shift 535
+	.  error
+
+
+state 416
+	triggerBeforeAfterStmt:  BEFORE DELETE ON.ID 
+
+	ID  shift 536
+	.  error
+
+
+state 417
+	triggerBeforeAfterStmt:  AFTER UPDATE ON.ID 
+
+	ID  shift 537
+	.  error
+
+
+state 418
+	triggerBeforeAfterStmt:  AFTER UPDATE OF.ID ON ID 
+
+	ID  shift 538
+	.  error
+
+
+state 419
+	triggerBeforeAfterStmt:  AFTER INSERT ON.ID 
+
+	ID  shift 539
+	.  error
+
+
+state 420
+	triggerBeforeAfterStmt:  AFTER DELETE ON.ID 
+
+	ID  shift 540
+	.  error
+
+
+state 421
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE.ON ID 
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE.OF ID ON ID 
+
+	ON  shift 541
+	OF  shift 542
+	.  error
+
+
+state 422
+	triggerBeforeAfterStmt:  INSTEAD OF INSERT.ON ID 
+
+	ON  shift 543
+	.  error
+
+
+state 423
+	triggerBeforeAfterStmt:  INSTEAD OF DELETE.ON ID 
+
+	ON  shift 544
+	.  error
+
+
+state 424
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList RPAREN.psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList RPAREN.psmBody 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationList  goto 545
+	psmLocalDeclarationEntry  goto 195
+	psmBody  goto 546
+
+state 425
+	psmParameterList:  psmParameterList COMMA.psmParameterEntry 
+
+	IN  shift 288
+	OUT  shift 289
+	INOUT  shift 290
+	.  error
+
+	psmParameterEntry  goto 547
+
+state 426
+	psmParameterEntry:  IN ID.domain 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 548
+
+state 427
+	psmParameterEntry:  OUT ID.domain 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 549
+
+state 428
+	psmParameterEntry:  INOUT ID.domain 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 550
+
+state 429
+	psmBody:  BEGINTOKEN psmExecList END.SEMICOLON 
+
+	SEMICOLON  shift 551
+	.  error
+
+
+state 430
+	psmExecList:  psmExecList psmExecEntry.    (192)
+
+	.  reduce 192 (src line 3293)
+
+
+state 431
+	psmExecEntry:  RETURN psmValue.SEMICOLON 
+
+	SEMICOLON  shift 552
+	.  error
+
+
+state 432
+	psmExecEntry:  SET ID.EQUAL psmValue SEMICOLON 
+
+	EQUAL  shift 553
+	.  error
+
+
+state 433
+	psmForLoop:  FOR ID.AS ID CURSOR FOR subQuery DO psmExecList END FOR SEMICOLON 
+
+	AS  shift 554
+	.  error
+
+
+state 434
+	psmBranch:  IF condition.THEN psmExecList psmElseifList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition.THEN psmExecList psmElseifList END IF SEMICOLON 
+	psmBranch:  IF condition.THEN psmExecList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition.THEN psmExecList END IF SEMICOLON 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	AND  shift 339
+	OR  shift 340
+	THEN  shift 555
+	.  error
+
+
+state 435
+	psmLocalDeclarationEntry:  DECLARE ID domain.SEMICOLON 
+
+	SEMICOLON  shift 556
+	.  error
+
+
+state 436
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN.RETURNS domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN.RETURNS domain psmBody 
+
+	RETURNS  shift 557
+	.  error
+
+
+state 437
+	createPsmStmt:  CREATE FUNCTION ID RETURNS domain psmLocalDeclarationList.psmBody 
+	psmLocalDeclarationList:  psmLocalDeclarationList.psmLocalDeclarationEntry 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationEntry  goto 292
+	psmBody  goto 558
+
+state 438
+	createPsmStmt:  CREATE FUNCTION ID RETURNS domain psmBody.    (182)
+
+	.  reduce 182 (src line 3199)
+
+
+state 439
+	domain:  VARCHAR LPAREN.INTVALUE RPAREN 
+
+	INTVALUE  shift 559
+	.  error
+
+
+state 440
+	domain:  BIT LPAREN.INTVALUE RPAREN 
+
+	INTVALUE  shift 560
+	.  error
+
+
+state 441
+	domain:  BITVARYING LPAREN.INTVALUE RPAREN 
+
+	INTVALUE  shift 561
+	.  error
+
+
+state 442
+	domain:  DECIMAL LPAREN.INTVALUE COMMA INTVALUE RPAREN 
+
+	INTVALUE  shift 562
+	.  error
+
+
+state 443
+	domain:  NUMERIC LPAREN.INTVALUE COMMA INTVALUE RPAREN $$326 DATE 
+
+	INTVALUE  shift 563
+	.  error
+
+
+state 444
+	alterTableAddStmt:  ALTER TABLE ID ADD attributeDeclaration SEMICOLON.    (135)
+
+	.  reduce 135 (src line 2515)
+
+
+state 445
+	alterTableAddStmt:  ALTER TABLE ID ADD constraintWithName SEMICOLON.    (136)
+
+	.  reduce 136 (src line 2531)
+
+
+state 446
+	constraintWithName:  CONSTRAINT ID.constraint 
+
+	UNIQUE  shift 505
+	PRIMARYKEY  shift 506
+	CHECK  shift 507
+	FOREIGNKEY  shift 508
+	.  error
+
+	constraint  goto 564
+
+state 447
+	alterTableDropStmt:  ALTER TABLE ID DROP ID SEMICOLON.    (137)
+
+	.  reduce 137 (src line 2552)
+
+
+state 448
+	alterTableDropStmt:  ALTER TABLE ID DROP CONSTRAINT ID.SEMICOLON 
+
+	SEMICOLON  shift 565
+	.  error
+
+
+state 449
+	deleteStmt:  DELETE FROM ID WHERE condition SEMICOLON.    (117)
+
+	.  reduce 117 (src line 2234)
+
+
+state 450
+	insertStmt:  INSERTINTO ID VALUES LPAREN elementaryValueList RPAREN.SEMICOLON 
+
+	SEMICOLON  shift 566
+	.  error
+
+
+state 451
+	elementaryValueList:  elementaryValueList COMMA.elementaryValue 
+
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	.  error
+
+	elementaryValue  goto 567
+
+state 452
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES.subQuery SEMICOLON 
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES.LPAREN elementaryValueList RPAREN SEMICOLON 
+
+	LPAREN  shift 569
+	.  error
+
+	subQuery  goto 568
+
+state 453
+	attriNameList:  attriNameList COMMA ID.    (335)
+
+	.  reduce 335 (src line 4857)
+
+
+state 454
+	updateStmt:  UPDATE ID SET updateList WHERE condition.SEMICOLON 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	SEMICOLON  shift 570
+	AND  shift 339
+	OR  shift 340
+	.  error
+
+
+state 455
+	updateList:  updateList COMMA updateListEntry.    (126)
+
+	.  reduce 126 (src line 2362)
+
+
+state 456
+	updateListEntry:  ID EQUAL elementaryValue.    (127)
+
+	.  reduce 127 (src line 2369)
+
+
+state 457
+	logUserStmt:  CONNECT AS USER ID PASSWORD PASSWORDS.SEMICOLON 
+
+	SEMICOLON  shift 571
+	.  error
+
+
+state 458
+	logUserStmt:  CONNECT AS USER ID PASSWORD ID.SEMICOLON 
+
+	SEMICOLON  shift 572
+	.  error
+
+
+state 459
+	logUserStmt:  CONNECT AS USER ID PASSWORD INTVALUE.SEMICOLON 
+
+	SEMICOLON  shift 573
+	.  error
+
+
+state 460
+	psmValueList:  psmValueList COMMA psmValue.    (216)
+
+	.  reduce 216 (src line 3554)
+
+
+state 461
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.    (33)
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.HAVING condition 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.HAVING condition ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.HAVING condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList.HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	attriNameOptionTableNameList:  attriNameOptionTableNameList.COMMA attriNameOptionTableName 
+
+	HAVING  shift 574
+	ORDERBY  shift 575
+	LIMIT  shift 576
+	COMMA  shift 361
+	.  reduce 33 (src line 986)
+
+
+state 462
+	query:  selectStmt fromStmt WHERE condition ORDERBY orderByList.    (36)
+	query:  selectStmt fromStmt WHERE condition ORDERBY orderByList.LIMIT INTVALUE COMMA INTVALUE 
+	orderByList:  orderByList.COMMA orderByListEntry 
+
+	LIMIT  shift 577
+	COMMA  shift 363
+	.  reduce 36 (src line 1074)
+
+
+state 463
+	query:  selectStmt fromStmt WHERE condition LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 578
+	.  error
+
+
+state 464
+	condition:  condition.AND condition 
+	condition:  condition AND condition.    (284)
+	condition:  condition.OR condition 
+
+	.  reduce 284 (src line 4312)
+
+
+state 465
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+	condition:  condition OR condition.    (285)
+
+	.  reduce 285 (src line 4321)
+
+
+state 466
+	condition:  LPAREN condition RPAREN.    (283)
+
+	.  reduce 283 (src line 4309)
+
+
+state 467
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN.IN subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN.NOT IN subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN.IN ID 
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN.NOT IN ID 
+
+	IN  shift 579
+	NOT  shift 580
+	.  error
+
+
+state 468
+	predicate:  attriNameOptionTableName compareMark elementaryValue.    (286)
+
+	.  reduce 286 (src line 4371)
+
+
+state 469
+	predicate:  attriNameOptionTableName compareMark ALL.subQuery 
+	predicate:  attriNameOptionTableName compareMark ALL.ID 
+
+	LPAREN  shift 154
+	ID  shift 582
+	.  error
+
+	subQuery  goto 581
+
+state 470
+	predicate:  attriNameOptionTableName compareMark ANY.subQuery 
+	predicate:  attriNameOptionTableName compareMark ANY.ID 
+
+	LPAREN  shift 154
+	ID  shift 584
+	.  error
+
+	subQuery  goto 583
+
+state 471
+	predicate:  attriNameOptionTableName LIKE STRINGVALUE.    (287)
+
+	.  reduce 287 (src line 4383)
+
+
+state 472
+	predicate:  attriNameOptionTableName IN subQuery.    (288)
+
+	.  reduce 288 (src line 4395)
+
+
+state 473
+	predicate:  attriNameOptionTableName IN ID.    (290)
+
+	.  reduce 290 (src line 4415)
+
+
+state 474
+	predicate:  attriNameOptionTableName NOT IN.subQuery 
+	predicate:  attriNameOptionTableName NOT IN.ID 
+
+	LPAREN  shift 154
+	ID  shift 586
+	.  error
+
+	subQuery  goto 585
+
+state 475
+	predicate:  attriNameOptionTableName IS NULLMARK.    (300)
+
+	.  reduce 300 (src line 4523)
+
+
+state 476
+	predicate:  attriNameOptionTableName IS NOT.NULLMARK 
+
+	NULLMARK  shift 587
+	.  error
+
+
+state 477
+	predicate:  NOT attriNameOptionTableName compareMark.ALL subQuery 
+	predicate:  NOT attriNameOptionTableName compareMark.ANY subQuery 
+	predicate:  NOT attriNameOptionTableName compareMark.ALL ID 
+	predicate:  NOT attriNameOptionTableName compareMark.ANY ID 
+
+	ALL  shift 588
+	ANY  shift 589
+	.  error
+
+
+state 478
+	predicate:  NOT EXISTS subQuery.    (307)
+
+	.  reduce 307 (src line 4590)
+
+
+state 479
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition.    (32)
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition.ORDERBY orderByList 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition.LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition.ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	ORDERBY  shift 590
+	LIMIT  shift 591
+	AND  shift 339
+	OR  shift 340
+	.  reduce 32 (src line 957)
+
+
+state 480
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList.    (37)
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList.LIMIT INTVALUE COMMA INTVALUE 
+	orderByList:  orderByList.COMMA orderByListEntry 
+
+	LIMIT  shift 592
+	COMMA  shift 363
+	.  reduce 37 (src line 1104)
+
+
+state 481
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 593
+	.  error
+
+
+state 482
+	attriNameOptionTableNameList:  attriNameOptionTableNameList COMMA attriNameOptionTableName.    (337)
+
+	.  reduce 337 (src line 4867)
+
+
+state 483
+	query:  selectStmt fromStmt ORDERBY orderByList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 594
+	.  error
+
+
+state 484
+	orderByList:  orderByList COMMA orderByListEntry.    (86)
+
+	.  reduce 86 (src line 1942)
+
+
+state 485
+	query:  selectStmt fromStmt LIMIT INTVALUE COMMA INTVALUE.    (41)
+
+	.  reduce 41 (src line 1232)
+
+
+state 486
+	joinStmt:  ID CROSS JOIN ID.    (66)
+
+	.  reduce 66 (src line 1750)
+
+
+state 487
+	joinStmt:  ID JOIN ID ON.onList 
+
+	ID  shift 97
+	.  error
+
+	onList  goto 595
+	onListEntry  goto 596
+	attriNameOptionTableName  goto 597
+
+state 488
+	joinStmt:  ID NATURAL JOIN ID.    (68)
+
+	.  reduce 68 (src line 1770)
+
+
+state 489
+	joinStmt:  ID NATURAL FULL OUTER.JOIN ID 
+
+	JOIN  shift 598
+	.  error
+
+
+state 490
+	joinStmt:  ID NATURAL LEFT OUTER.JOIN ID 
+
+	JOIN  shift 599
+	.  error
+
+
+state 491
+	joinStmt:  ID NATURAL RIGHT OUTER.JOIN ID 
+
+	JOIN  shift 600
+	.  error
+
+
+state 492
+	joinStmt:  ID FULL OUTER JOIN.ID ON onList 
+
+	ID  shift 601
+	.  error
+
+
+state 493
+	joinStmt:  ID LEFT OUTER JOIN.ID ON onList 
+
+	ID  shift 602
+	.  error
+
+
+state 494
+	joinStmt:  ID RIGHT OUTER JOIN.ID ON onList 
+
+	ID  shift 603
+	.  error
+
+
+state 495
+	aggregation:  SUM LPAREN DISTINCT attriNameOptionTableName RPAREN.    (228)
+
+	.  reduce 228 (src line 3702)
+
+
+state 496
+	aggregation:  AVG LPAREN DISTINCT attriNameOptionTableName RPAREN.    (230)
+
+	.  reduce 230 (src line 3721)
+
+
+state 497
+	aggregation:  MIN LPAREN DISTINCT attriNameOptionTableName RPAREN.    (232)
+
+	.  reduce 232 (src line 3739)
+
+
+state 498
+	aggregation:  MAX LPAREN DISTINCT attriNameOptionTableName RPAREN.    (234)
+
+	.  reduce 234 (src line 3757)
+
+
+state 499
+	aggregation:  COUNT LPAREN DISTINCT attriNameOptionTableName RPAREN.    (236)
+
+	.  reduce 236 (src line 3775)
+
+
+state 500
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList RPAREN SEMICOLON.    (128)
+
+	.  reduce 128 (src line 2400)
+
+
+state 501
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList COMMA constraintList.RPAREN SEMICOLON 
+	constraintList:  constraintList.COMMA constraintWithName 
+	constraintList:  constraintList.COMMA constraint 
+
+	RPAREN  shift 604
+	COMMA  shift 605
+	.  error
+
+
+state 502
+	attributeDeclarationList:  attributeDeclarationList COMMA attributeDeclaration.    (131)
+
+	.  reduce 131 (src line 2443)
+
+
+state 503
+	constraintList:  constraintWithName.    (243)
+
+	.  reduce 243 (src line 3895)
+
+
+state 504
+	constraintList:  constraint.    (244)
+
+	.  reduce 244 (src line 3901)
+
+
+state 505
+	constraint:  UNIQUE.LPAREN attriNameList RPAREN 
+
+	LPAREN  shift 606
+	.  error
+
+
+state 506
+	constraint:  PRIMARYKEY.LPAREN attriNameList RPAREN 
+
+	LPAREN  shift 607
+	.  error
+
+
+state 507
+	constraint:  CHECK.LPAREN condition RPAREN 
+
+	LPAREN  shift 608
+	.  error
+
+
+state 508
+	constraint:  FOREIGNKEY.LPAREN ID RPAREN REFERENCES ID LPAREN ID RPAREN 
+	constraint:  FOREIGNKEY.LPAREN ID RPAREN REFERENCES ID LPAREN ID RPAREN foreignKeyParameter 
+
+	LPAREN  shift 609
+	.  error
+
+
+state 509
+	attributeDeclaration:  ID domain constraintAfterAttributeList.    (133)
+	constraintAfterAttributeList:  constraintAfterAttributeList.constraintAfterAttributeWithName 
+	constraintAfterAttributeList:  constraintAfterAttributeList.constraintAfterAttribute 
+
+	DEFAULT  shift 513
+	UNIQUE  shift 514
+	PRIMARYKEY  shift 515
+	REFERENCES  shift 517
+	CONSTRAINT  shift 512
+	NOT  shift 516
+	.  reduce 133 (src line 2460)
+
+	constraintAfterAttribute  goto 611
+	constraintAfterAttributeWithName  goto 610
+
+state 510
+	constraintAfterAttributeList:  constraintAfterAttributeWithName.    (239)
+
+	.  reduce 239 (src line 3873)
+
+
+state 511
+	constraintAfterAttributeList:  constraintAfterAttribute.    (240)
+
+	.  reduce 240 (src line 3879)
+
+
+state 512
+	constraintAfterAttributeWithName:  CONSTRAINT.ID constraintAfterAttribute 
+
+	ID  shift 612
+	.  error
+
+
+state 513
+	constraintAfterAttribute:  DEFAULT.elementaryValue 
+
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	.  error
+
+	elementaryValue  goto 613
+
+state 514
+	constraintAfterAttribute:  UNIQUE.    (255)
+
+	.  reduce 255 (src line 4011)
+
+
+state 515
+	constraintAfterAttribute:  PRIMARYKEY.    (256)
+
+	.  reduce 256 (src line 4019)
+
+
+state 516
+	constraintAfterAttribute:  NOT.NULLMARK 
+
+	NULLMARK  shift 614
+	.  error
+
+
+state 517
+	constraintAfterAttribute:  REFERENCES.ID LPAREN ID RPAREN 
+	constraintAfterAttribute:  REFERENCES.ID LPAREN ID RPAREN foreignKeyParameter 
+
+	ID  shift 615
+	.  error
+
+
+state 518
+	createAssertStmt:  CREATE ASSERTION ID CHECK LPAREN condition RPAREN.SEMICOLON 
+
+	SEMICOLON  shift 616
+	.  error
+
+
+state 519
+	createViewStmt:  CREATE VIEW ID LPAREN attriNameList RPAREN AS.subQuery SEMICOLON 
+
+	LPAREN  shift 154
+	.  error
+
+	subQuery  goto 617
+
+state 520
+	createIndexStmt:  CREATE INDEX ID ON ID LPAREN attriNameList.RPAREN SEMICOLON 
+	attriNameList:  attriNameList.COMMA ID 
+
+	RPAREN  shift 618
+	COMMA  shift 329
+	.  error
+
+
+state 521
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum.triggerWhenCondition triggerExecStmt 
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum.triggerExecStmt 
+
+	WHEN  shift 410
+	BEGINTOKEN  shift 411
+	.  error
+
+	triggerWhenCondition  goto 619
+	triggerExecStmt  goto 620
+
+state 522
+	triggerOldNewList:  triggerOldNewList COMMA.oldNewEntry 
+
+	OLD  shift 406
+	NEW  shift 407
+	.  error
+
+	oldNewEntry  goto 621
+
+state 523
+	oldNewEntry:  OLD ROW.AS ID 
+
+	AS  shift 622
+	.  error
+
+
+state 524
+	oldNewEntry:  OLD TABLE.AS ID 
+
+	AS  shift 623
+	.  error
+
+
+state 525
+	oldNewEntry:  NEW ROW.AS ID 
+
+	AS  shift 624
+	.  error
+
+
+state 526
+	oldNewEntry:  NEW TABLE.AS ID 
+
+	AS  shift 625
+	.  error
+
+
+state 527
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt triggerForEachEnum triggerWhenCondition triggerExecStmt.    (147)
+
+	.  reduce 147 (src line 2768)
+
+
+state 528
+	triggerWhenCondition:  WHEN condition.    (170)
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	AND  shift 339
+	OR  shift 340
+	.  reduce 170 (src line 2998)
+
+
+state 529
+	triggerExecStmt:  BEGINTOKEN dmlList.END SEMICOLON 
+	dmlList:  dmlList.dml 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	END  shift 626
+	.  error
+
+	dml  goto 627
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+
+state 530
+	dmlList:  dml.    (172)
+
+	.  reduce 172 (src line 3012)
+
+
+state 531
+	triggerForEachEnum:  FOR EACH ROW.    (168)
+
+	.  reduce 168 (src line 2984)
+
+
+state 532
+	triggerForEachEnum:  FOR EACH STATEMENT.    (169)
+
+	.  reduce 169 (src line 2990)
+
+
+state 533
+	triggerBeforeAfterStmt:  BEFORE UPDATE ON ID.    (150)
+
+	.  reduce 150 (src line 2830)
+
+
+state 534
+	triggerBeforeAfterStmt:  BEFORE UPDATE OF ID.ON ID 
+
+	ON  shift 628
+	.  error
+
+
+state 535
+	triggerBeforeAfterStmt:  BEFORE INSERT ON ID.    (156)
+
+	.  reduce 156 (src line 2882)
+
+
+state 536
+	triggerBeforeAfterStmt:  BEFORE DELETE ON ID.    (159)
+
+	.  reduce 159 (src line 2906)
+
+
+state 537
+	triggerBeforeAfterStmt:  AFTER UPDATE ON ID.    (152)
+
+	.  reduce 152 (src line 2848)
+
+
+state 538
+	triggerBeforeAfterStmt:  AFTER UPDATE OF ID.ON ID 
+
+	ON  shift 629
+	.  error
+
+
+state 539
+	triggerBeforeAfterStmt:  AFTER INSERT ON ID.    (157)
+
+	.  reduce 157 (src line 2890)
+
+
+state 540
+	triggerBeforeAfterStmt:  AFTER DELETE ON ID.    (160)
+
+	.  reduce 160 (src line 2914)
+
+
+state 541
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE ON.ID 
+
+	ID  shift 630
+	.  error
+
+
+state 542
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE OF.ID ON ID 
+
+	ID  shift 631
+	.  error
+
+
+state 543
+	triggerBeforeAfterStmt:  INSTEAD OF INSERT ON.ID 
+
+	ID  shift 632
+	.  error
+
+
+state 544
+	triggerBeforeAfterStmt:  INSTEAD OF DELETE ON.ID 
+
+	ID  shift 633
+	.  error
+
+
+state 545
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList RPAREN psmLocalDeclarationList.psmBody 
+	psmLocalDeclarationList:  psmLocalDeclarationList.psmLocalDeclarationEntry 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationEntry  goto 292
+	psmBody  goto 634
+
+state 546
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList RPAREN psmBody.    (176)
+
+	.  reduce 176 (src line 3127)
+
+
+state 547
+	psmParameterList:  psmParameterList COMMA psmParameterEntry.    (183)
+
+	.  reduce 183 (src line 3213)
+
+
+state 548
+	psmParameterEntry:  IN ID domain.    (185)
+
+	.  reduce 185 (src line 3227)
+
+
+state 549
+	psmParameterEntry:  OUT ID domain.    (186)
+
+	.  reduce 186 (src line 3239)
+
+
+state 550
+	psmParameterEntry:  INOUT ID domain.    (187)
+
+	.  reduce 187 (src line 3248)
+
+
+state 551
+	psmBody:  BEGINTOKEN psmExecList END SEMICOLON.    (191)
+
+	.  reduce 191 (src line 3286)
+
+
+state 552
+	psmExecEntry:  RETURN psmValue SEMICOLON.    (194)
+
+	.  reduce 194 (src line 3308)
+
+
+state 553
+	psmExecEntry:  SET ID EQUAL.psmValue SEMICOLON 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	CALL  shift 44
+	LPAREN  shift 105
+	ID  shift 217
+	.  error
+
+	aggregation  goto 173
+	expression  goto 216
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 172
+	elementaryValue  goto 214
+	psmValue  goto 635
+	psmCall  goto 215
+
+state 554
+	psmForLoop:  FOR ID AS.ID CURSOR FOR subQuery DO psmExecList END FOR SEMICOLON 
+
+	ID  shift 636
+	.  error
+
+
+state 555
+	psmBranch:  IF condition THEN.psmExecList psmElseifList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition THEN.psmExecList psmElseifList END IF SEMICOLON 
+	psmBranch:  IF condition THEN.psmExecList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition THEN.psmExecList END IF SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecList  goto 637
+	psmExecEntry  goto 294
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 556
+	psmLocalDeclarationEntry:  DECLARE ID domain SEMICOLON.    (190)
+
+	.  reduce 190 (src line 3274)
+
+
+state 557
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS.domain psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS.domain psmBody 
+
+	CHAR  shift 305
+	VARCHAR  shift 306
+	BIT  shift 307
+	BITVARYING  shift 308
+	BOOLEAN  shift 309
+	INT  shift 310
+	INTEGER  shift 311
+	SHORTINT  shift 312
+	FLOAT  shift 313
+	REAL  shift 314
+	DOUBLEPRECISION  shift 315
+	DECIMAL  shift 316
+	NUMERIC  shift 317
+	TIME  shift 318
+	.  error
+
+	domain  goto 638
+
+state 558
+	createPsmStmt:  CREATE FUNCTION ID RETURNS domain psmLocalDeclarationList psmBody.    (181)
+
+	.  reduce 181 (src line 3187)
+
+
+state 559
+	domain:  VARCHAR LPAREN INTVALUE.RPAREN 
+
+	RPAREN  shift 639
+	.  error
+
+
+state 560
+	domain:  BIT LPAREN INTVALUE.RPAREN 
+
+	RPAREN  shift 640
+	.  error
+
+
+state 561
+	domain:  BITVARYING LPAREN INTVALUE.RPAREN 
+
+	RPAREN  shift 641
+	.  error
+
+
+state 562
+	domain:  DECIMAL LPAREN INTVALUE.COMMA INTVALUE RPAREN 
+
+	COMMA  shift 642
+	.  error
+
+
+state 563
+	domain:  NUMERIC LPAREN INTVALUE.COMMA INTVALUE RPAREN $$326 DATE 
+
+	COMMA  shift 643
+	.  error
+
+
+state 564
+	constraintWithName:  CONSTRAINT ID constraint.    (247)
+
+	.  reduce 247 (src line 3917)
+
+
+state 565
+	alterTableDropStmt:  ALTER TABLE ID DROP CONSTRAINT ID SEMICOLON.    (138)
+
+	.  reduce 138 (src line 2561)
+
+
+state 566
+	insertStmt:  INSERTINTO ID VALUES LPAREN elementaryValueList RPAREN SEMICOLON.    (119)
+
+	.  reduce 119 (src line 2274)
+
+
+state 567
+	elementaryValueList:  elementaryValueList COMMA elementaryValue.    (122)
+
+	.  reduce 122 (src line 2312)
+
+
+state 568
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES subQuery.SEMICOLON 
+
+	SEMICOLON  shift 644
+	.  error
+
+
+state 569
+	subQuery:  LPAREN.query RPAREN 
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES LPAREN.elementaryValueList RPAREN SEMICOLON 
+
+	SELECT  shift 46
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	.  error
+
+	query  goto 242
+	selectStmt  goto 45
+	elementaryValueList  goto 645
+	elementaryValue  goto 327
+
+state 570
+	updateStmt:  UPDATE ID SET updateList WHERE condition SEMICOLON.    (124)
+
+	.  reduce 124 (src line 2342)
+
+
+state 571
+	logUserStmt:  CONNECT AS USER ID PASSWORD PASSWORDS SEMICOLON.    (114)
+
+	.  reduce 114 (src line 2196)
+
+
+state 572
+	logUserStmt:  CONNECT AS USER ID PASSWORD ID SEMICOLON.    (115)
+
+	.  reduce 115 (src line 2206)
+
+
+state 573
+	logUserStmt:  CONNECT AS USER ID PASSWORD INTVALUE SEMICOLON.    (116)
+
+	.  reduce 116 (src line 2215)
+
+
+state 574
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING.condition 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING.condition ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING.condition LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING.condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 646
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 575
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY.orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY.orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByList  goto 647
+	orderByListEntry  goto 227
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 576
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 648
+	.  error
+
+
+state 577
+	query:  selectStmt fromStmt WHERE condition ORDERBY orderByList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 649
+	.  error
+
+
+state 578
+	query:  selectStmt fromStmt WHERE condition LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 650
+	.  error
+
+
+state 579
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN IN.subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN IN.ID 
+
+	LPAREN  shift 154
+	ID  shift 652
+	.  error
+
+	subQuery  goto 651
+
+state 580
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN NOT.IN subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN NOT.IN ID 
+
+	IN  shift 653
+	.  error
+
+
+state 581
+	predicate:  attriNameOptionTableName compareMark ALL subQuery.    (292)
+
+	.  reduce 292 (src line 4435)
+
+
+state 582
+	predicate:  attriNameOptionTableName compareMark ALL ID.    (296)
+
+	.  reduce 296 (src line 4479)
+
+
+state 583
+	predicate:  attriNameOptionTableName compareMark ANY subQuery.    (294)
+
+	.  reduce 294 (src line 4457)
+
+
+state 584
+	predicate:  attriNameOptionTableName compareMark ANY ID.    (298)
+
+	.  reduce 298 (src line 4501)
+
+
+state 585
+	predicate:  attriNameOptionTableName NOT IN subQuery.    (289)
+
+	.  reduce 289 (src line 4405)
+
+
+state 586
+	predicate:  attriNameOptionTableName NOT IN ID.    (291)
+
+	.  reduce 291 (src line 4425)
+
+
+state 587
+	predicate:  attriNameOptionTableName IS NOT NULLMARK.    (301)
+
+	.  reduce 301 (src line 4532)
+
+
+state 588
+	predicate:  NOT attriNameOptionTableName compareMark ALL.subQuery 
+	predicate:  NOT attriNameOptionTableName compareMark ALL.ID 
+
+	LPAREN  shift 154
+	ID  shift 655
+	.  error
+
+	subQuery  goto 654
+
+state 589
+	predicate:  NOT attriNameOptionTableName compareMark ANY.subQuery 
+	predicate:  NOT attriNameOptionTableName compareMark ANY.ID 
+
+	LPAREN  shift 154
+	ID  shift 657
+	.  error
+
+	subQuery  goto 656
+
+state 590
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY.orderByList 
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY.orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByList  goto 658
+	orderByListEntry  goto 227
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 591
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 659
+	.  error
+
+
+state 592
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 660
+	.  error
+
+
+state 593
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 661
+	.  error
+
+
+state 594
+	query:  selectStmt fromStmt ORDERBY orderByList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 662
+	.  error
+
+
+state 595
+	joinStmt:  ID JOIN ID ON onList.    (67)
+	onList:  onList.AND onListEntry 
+
+	AND  shift 663
+	.  reduce 67 (src line 1760)
+
+
+state 596
+	onList:  onListEntry.    (76)
+
+	.  reduce 76 (src line 1844)
+
+
+state 597
+	onListEntry:  attriNameOptionTableName.EQUAL attriNameOptionTableName 
+
+	EQUAL  shift 664
+	.  error
+
+
+state 598
+	joinStmt:  ID NATURAL FULL OUTER JOIN.ID 
+
+	ID  shift 665
+	.  error
+
+
+state 599
+	joinStmt:  ID NATURAL LEFT OUTER JOIN.ID 
+
+	ID  shift 666
+	.  error
+
+
+state 600
+	joinStmt:  ID NATURAL RIGHT OUTER JOIN.ID 
+
+	ID  shift 667
+	.  error
+
+
+state 601
+	joinStmt:  ID FULL OUTER JOIN ID.ON onList 
+
+	ON  shift 668
+	.  error
+
+
+state 602
+	joinStmt:  ID LEFT OUTER JOIN ID.ON onList 
+
+	ON  shift 669
+	.  error
+
+
+state 603
+	joinStmt:  ID RIGHT OUTER JOIN ID.ON onList 
+
+	ON  shift 670
+	.  error
+
+
+state 604
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList COMMA constraintList RPAREN.SEMICOLON 
+
+	SEMICOLON  shift 671
+	.  error
+
+
+state 605
+	constraintList:  constraintList COMMA.constraintWithName 
+	constraintList:  constraintList COMMA.constraint 
+
+	UNIQUE  shift 505
+	PRIMARYKEY  shift 506
+	CHECK  shift 507
+	FOREIGNKEY  shift 508
+	CONSTRAINT  shift 321
+	.  error
+
+	constraint  goto 673
+	constraintWithName  goto 672
+
+state 606
+	constraint:  UNIQUE LPAREN.attriNameList RPAREN 
+
+	ID  shift 206
+	.  error
+
+	attriNameList  goto 674
+
+state 607
+	constraint:  PRIMARYKEY LPAREN.attriNameList RPAREN 
+
+	ID  shift 206
+	.  error
+
+	attriNameList  goto 675
+
+state 608
+	constraint:  CHECK LPAREN.condition RPAREN 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 676
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 609
+	constraint:  FOREIGNKEY LPAREN.ID RPAREN REFERENCES ID LPAREN ID RPAREN 
+	constraint:  FOREIGNKEY LPAREN.ID RPAREN REFERENCES ID LPAREN ID RPAREN foreignKeyParameter 
+
+	ID  shift 677
+	.  error
+
+
+state 610
+	constraintAfterAttributeList:  constraintAfterAttributeList constraintAfterAttributeWithName.    (241)
+
+	.  reduce 241 (src line 3884)
+
+
+state 611
+	constraintAfterAttributeList:  constraintAfterAttributeList constraintAfterAttribute.    (242)
+
+	.  reduce 242 (src line 3888)
+
+
+state 612
+	constraintAfterAttributeWithName:  CONSTRAINT ID.constraintAfterAttribute 
+
+	DEFAULT  shift 513
+	UNIQUE  shift 514
+	PRIMARYKEY  shift 515
+	REFERENCES  shift 517
+	NOT  shift 516
+	.  error
+
+	constraintAfterAttribute  goto 678
+
+state 613
+	constraintAfterAttribute:  DEFAULT elementaryValue.    (254)
+
+	.  reduce 254 (src line 4001)
+
+
+state 614
+	constraintAfterAttribute:  NOT NULLMARK.    (257)
+
+	.  reduce 257 (src line 4027)
+
+
+state 615
+	constraintAfterAttribute:  REFERENCES ID.LPAREN ID RPAREN 
+	constraintAfterAttribute:  REFERENCES ID.LPAREN ID RPAREN foreignKeyParameter 
+
+	LPAREN  shift 679
+	.  error
+
+
+state 616
+	createAssertStmt:  CREATE ASSERTION ID CHECK LPAREN condition RPAREN SEMICOLON.    (139)
+
+	.  reduce 139 (src line 2579)
+
+
+state 617
+	createViewStmt:  CREATE VIEW ID LPAREN attriNameList RPAREN AS subQuery.SEMICOLON 
+
+	SEMICOLON  shift 680
+	.  error
+
+
+state 618
+	createIndexStmt:  CREATE INDEX ID ON ID LPAREN attriNameList RPAREN.SEMICOLON 
+
+	SEMICOLON  shift 681
+	.  error
+
+
+state 619
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerWhenCondition.triggerExecStmt 
+
+	BEGINTOKEN  shift 411
+	.  error
+
+	triggerExecStmt  goto 682
+
+state 620
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerExecStmt.    (148)
+
+	.  reduce 148 (src line 2788)
+
+
+state 621
+	triggerOldNewList:  triggerOldNewList COMMA oldNewEntry.    (163)
+
+	.  reduce 163 (src line 2940)
+
+
+state 622
+	oldNewEntry:  OLD ROW AS.ID 
+
+	ID  shift 683
+	.  error
+
+
+state 623
+	oldNewEntry:  OLD TABLE AS.ID 
+
+	ID  shift 684
+	.  error
+
+
+state 624
+	oldNewEntry:  NEW ROW AS.ID 
+
+	ID  shift 685
+	.  error
+
+
+state 625
+	oldNewEntry:  NEW TABLE AS.ID 
+
+	ID  shift 686
+	.  error
+
+
+state 626
+	triggerExecStmt:  BEGINTOKEN dmlList END.SEMICOLON 
+
+	SEMICOLON  shift 687
+	.  error
+
+
+state 627
+	dmlList:  dmlList dml.    (173)
+
+	.  reduce 173 (src line 3019)
+
+
+state 628
+	triggerBeforeAfterStmt:  BEFORE UPDATE OF ID ON.ID 
+
+	ID  shift 688
+	.  error
+
+
+state 629
+	triggerBeforeAfterStmt:  AFTER UPDATE OF ID ON.ID 
+
+	ID  shift 689
+	.  error
+
+
+state 630
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE ON ID.    (154)
+
+	.  reduce 154 (src line 2865)
+
+
+state 631
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE OF ID.ON ID 
+
+	ON  shift 690
+	.  error
+
+
+state 632
+	triggerBeforeAfterStmt:  INSTEAD OF INSERT ON ID.    (158)
+
+	.  reduce 158 (src line 2898)
+
+
+state 633
+	triggerBeforeAfterStmt:  INSTEAD OF DELETE ON ID.    (161)
+
+	.  reduce 161 (src line 2922)
+
+
+state 634
+	createPsmStmt:  CREATE PROCEDURE ID LPAREN psmParameterList RPAREN psmLocalDeclarationList psmBody.    (175)
+
+	.  reduce 175 (src line 3112)
+
+
+state 635
+	psmExecEntry:  SET ID EQUAL psmValue.SEMICOLON 
+
+	SEMICOLON  shift 691
+	.  error
+
+
+state 636
+	psmForLoop:  FOR ID AS ID.CURSOR FOR subQuery DO psmExecList END FOR SEMICOLON 
+
+	CURSOR  shift 692
+	.  error
+
+
+state 637
+	psmExecList:  psmExecList.psmExecEntry 
+	psmBranch:  IF condition THEN psmExecList.psmElseifList ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition THEN psmExecList.psmElseifList END IF SEMICOLON 
+	psmBranch:  IF condition THEN psmExecList.ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition THEN psmExecList.END IF SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	END  shift 695
+	ELSEIF  shift 697
+	IF  shift 301
+	ELSE  shift 694
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecEntry  goto 430
+	psmForLoop  goto 297
+	psmBranch  goto 298
+	psmElseifList  goto 693
+	psmElseifEntry  goto 696
+
+state 638
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain.psmLocalDeclarationList psmBody 
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain.psmBody 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationList  goto 698
+	psmLocalDeclarationEntry  goto 195
+	psmBody  goto 699
+
+state 639
+	domain:  VARCHAR LPAREN INTVALUE RPAREN.    (315)
+
+	.  reduce 315 (src line 4665)
+
+
+state 640
+	domain:  BIT LPAREN INTVALUE RPAREN.    (316)
+
+	.  reduce 316 (src line 4673)
+
+
+state 641
+	domain:  BITVARYING LPAREN INTVALUE RPAREN.    (317)
+
+	.  reduce 317 (src line 4681)
+
+
+state 642
+	domain:  DECIMAL LPAREN INTVALUE COMMA.INTVALUE RPAREN 
+
+	INTVALUE  shift 700
+	.  error
+
+
+state 643
+	domain:  NUMERIC LPAREN INTVALUE COMMA.INTVALUE RPAREN $$326 DATE 
+
+	INTVALUE  shift 701
+	.  error
+
+
+state 644
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES subQuery SEMICOLON.    (120)
+
+	.  reduce 120 (src line 2285)
+
+
+state 645
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES LPAREN elementaryValueList.RPAREN SEMICOLON 
+	elementaryValueList:  elementaryValueList.COMMA elementaryValue 
+
+	RPAREN  shift 702
+	COMMA  shift 451
+	.  error
+
+
+state 646
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition.    (34)
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition.ORDERBY orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition.LIMIT INTVALUE COMMA INTVALUE 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition.ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	ORDERBY  shift 703
+	LIMIT  shift 704
+	AND  shift 339
+	OR  shift 340
+	.  reduce 34 (src line 1015)
+
+
+state 647
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList.    (39)
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList.LIMIT INTVALUE COMMA INTVALUE 
+	orderByList:  orderByList.COMMA orderByListEntry 
+
+	LIMIT  shift 705
+	COMMA  shift 363
+	.  reduce 39 (src line 1167)
+
+
+state 648
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 706
+	.  error
+
+
+state 649
+	query:  selectStmt fromStmt WHERE condition ORDERBY orderByList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 707
+	.  error
+
+
+state 650
+	query:  selectStmt fromStmt WHERE condition LIMIT INTVALUE COMMA INTVALUE.    (42)
+
+	.  reduce 42 (src line 1260)
+
+
+state 651
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN IN subQuery.    (302)
+
+	.  reduce 302 (src line 4541)
+
+
+state 652
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN IN ID.    (304)
+
+	.  reduce 304 (src line 4561)
+
+
+state 653
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN NOT IN.subQuery 
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN NOT IN.ID 
+
+	LPAREN  shift 154
+	ID  shift 709
+	.  error
+
+	subQuery  goto 708
+
+state 654
+	predicate:  NOT attriNameOptionTableName compareMark ALL subQuery.    (293)
+
+	.  reduce 293 (src line 4446)
+
+
+state 655
+	predicate:  NOT attriNameOptionTableName compareMark ALL ID.    (297)
+
+	.  reduce 297 (src line 4490)
+
+
+state 656
+	predicate:  NOT attriNameOptionTableName compareMark ANY subQuery.    (295)
+
+	.  reduce 295 (src line 4468)
+
+
+state 657
+	predicate:  NOT attriNameOptionTableName compareMark ANY ID.    (299)
+
+	.  reduce 299 (src line 4512)
+
+
+state 658
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList.    (38)
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList.LIMIT INTVALUE COMMA INTVALUE 
+	orderByList:  orderByList.COMMA orderByListEntry 
+
+	LIMIT  shift 710
+	COMMA  shift 363
+	.  reduce 38 (src line 1135)
+
+
+state 659
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 711
+	.  error
+
+
+state 660
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 712
+	.  error
+
+
+state 661
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE.    (43)
+
+	.  reduce 43 (src line 1290)
+
+
+state 662
+	query:  selectStmt fromStmt ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE.    (47)
+
+	.  reduce 47 (src line 1422)
+
+
+state 663
+	onList:  onList AND.onListEntry 
+
+	ID  shift 97
+	.  error
+
+	onListEntry  goto 713
+	attriNameOptionTableName  goto 597
+
+state 664
+	onListEntry:  attriNameOptionTableName EQUAL.attriNameOptionTableName 
+
+	ID  shift 97
+	.  error
+
+	attriNameOptionTableName  goto 714
+
+state 665
+	joinStmt:  ID NATURAL FULL OUTER JOIN ID.    (69)
+
+	.  reduce 69 (src line 1779)
+
+
+state 666
+	joinStmt:  ID NATURAL LEFT OUTER JOIN ID.    (70)
+
+	.  reduce 70 (src line 1788)
+
+
+state 667
+	joinStmt:  ID NATURAL RIGHT OUTER JOIN ID.    (71)
+
+	.  reduce 71 (src line 1797)
+
+
+state 668
+	joinStmt:  ID FULL OUTER JOIN ID ON.onList 
+
+	ID  shift 97
+	.  error
+
+	onList  goto 715
+	onListEntry  goto 596
+	attriNameOptionTableName  goto 597
+
+state 669
+	joinStmt:  ID LEFT OUTER JOIN ID ON.onList 
+
+	ID  shift 97
+	.  error
+
+	onList  goto 716
+	onListEntry  goto 596
+	attriNameOptionTableName  goto 597
+
+state 670
+	joinStmt:  ID RIGHT OUTER JOIN ID ON.onList 
+
+	ID  shift 97
+	.  error
+
+	onList  goto 717
+	onListEntry  goto 596
+	attriNameOptionTableName  goto 597
+
+state 671
+	createTableStmt:  CREATE TABLE ID LPAREN attributeDeclarationList COMMA constraintList RPAREN SEMICOLON.    (129)
+
+	.  reduce 129 (src line 2416)
+
+
+state 672
+	constraintList:  constraintList COMMA constraintWithName.    (245)
+
+	.  reduce 245 (src line 3906)
+
+
+state 673
+	constraintList:  constraintList COMMA constraint.    (246)
+
+	.  reduce 246 (src line 3910)
+
+
+state 674
+	constraint:  UNIQUE LPAREN attriNameList.RPAREN 
+	attriNameList:  attriNameList.COMMA ID 
+
+	RPAREN  shift 718
+	COMMA  shift 329
+	.  error
+
+
+state 675
+	constraint:  PRIMARYKEY LPAREN attriNameList.RPAREN 
+	attriNameList:  attriNameList.COMMA ID 
+
+	RPAREN  shift 719
+	COMMA  shift 329
+	.  error
+
+
+state 676
+	constraint:  CHECK LPAREN condition.RPAREN 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	AND  shift 339
+	OR  shift 340
+	RPAREN  shift 720
+	.  error
+
+
+state 677
+	constraint:  FOREIGNKEY LPAREN ID.RPAREN REFERENCES ID LPAREN ID RPAREN 
+	constraint:  FOREIGNKEY LPAREN ID.RPAREN REFERENCES ID LPAREN ID RPAREN foreignKeyParameter 
+
+	RPAREN  shift 721
+	.  error
+
+
+state 678
+	constraintAfterAttributeWithName:  CONSTRAINT ID constraintAfterAttribute.    (253)
+
+	.  reduce 253 (src line 3992)
+
+
+state 679
+	constraintAfterAttribute:  REFERENCES ID LPAREN.ID RPAREN 
+	constraintAfterAttribute:  REFERENCES ID LPAREN.ID RPAREN foreignKeyParameter 
+
+	ID  shift 722
+	.  error
+
+
+state 680
+	createViewStmt:  CREATE VIEW ID LPAREN attriNameList RPAREN AS subQuery SEMICOLON.    (142)
+
+	.  reduce 142 (src line 2627)
+
+
+state 681
+	createIndexStmt:  CREATE INDEX ID ON ID LPAREN attriNameList RPAREN SEMICOLON.    (144)
+
+	.  reduce 144 (src line 2665)
+
+
+state 682
+	createTriggerStmt:  CREATE TRIGGER ID triggerBeforeAfterStmt REFERENCING triggerOldNewList triggerForEachEnum triggerWhenCondition triggerExecStmt.    (146)
+
+	.  reduce 146 (src line 2746)
+
+
+state 683
+	oldNewEntry:  OLD ROW AS ID.    (164)
+
+	.  reduce 164 (src line 2948)
+
+
+state 684
+	oldNewEntry:  OLD TABLE AS ID.    (166)
+
+	.  reduce 166 (src line 2965)
+
+
+state 685
+	oldNewEntry:  NEW ROW AS ID.    (165)
+
+	.  reduce 165 (src line 2957)
+
+
+state 686
+	oldNewEntry:  NEW TABLE AS ID.    (167)
+
+	.  reduce 167 (src line 2973)
+
+
+state 687
+	triggerExecStmt:  BEGINTOKEN dmlList END SEMICOLON.    (171)
+
+	.  reduce 171 (src line 3005)
+
+
+state 688
+	triggerBeforeAfterStmt:  BEFORE UPDATE OF ID ON ID.    (151)
+
+	.  reduce 151 (src line 2839)
+
+
+state 689
+	triggerBeforeAfterStmt:  AFTER UPDATE OF ID ON ID.    (153)
+
+	.  reduce 153 (src line 2856)
+
+
+state 690
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE OF ID ON.ID 
+
+	ID  shift 723
+	.  error
+
+
+state 691
+	psmExecEntry:  SET ID EQUAL psmValue SEMICOLON.    (195)
+
+	.  reduce 195 (src line 3317)
+
+
+state 692
+	psmForLoop:  FOR ID AS ID CURSOR.FOR subQuery DO psmExecList END FOR SEMICOLON 
+
+	FOR  shift 724
+	.  error
+
+
+state 693
+	psmBranch:  IF condition THEN psmExecList psmElseifList.ELSE psmExecList END IF SEMICOLON 
+	psmBranch:  IF condition THEN psmExecList psmElseifList.END IF SEMICOLON 
+	psmElseifList:  psmElseifList.psmElseifEntry 
+
+	END  shift 726
+	ELSEIF  shift 697
+	ELSE  shift 725
+	.  error
+
+	psmElseifEntry  goto 727
+
+state 694
+	psmBranch:  IF condition THEN psmExecList ELSE.psmExecList END IF SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecList  goto 728
+	psmExecEntry  goto 294
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 695
+	psmBranch:  IF condition THEN psmExecList END.IF SEMICOLON 
+
+	IF  shift 729
+	.  error
+
+
+state 696
+	psmElseifList:  psmElseifEntry.    (205)
+
+	.  reduce 205 (src line 3424)
+
+
+state 697
+	psmElseifEntry:  ELSEIF.condition THEN psmExecList 
+
+	EXISTS  shift 223
+	LPAREN  shift 220
+	NOT  shift 222
+	ID  shift 97
+	.  error
+
+	condition  goto 730
+	predicate  goto 219
+	attriNameOptionTableName  goto 221
+
+state 698
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain psmLocalDeclarationList.psmBody 
+	psmLocalDeclarationList:  psmLocalDeclarationList.psmLocalDeclarationEntry 
+
+	BEGINTOKEN  shift 196
+	DECLARE  shift 197
+	.  error
+
+	psmLocalDeclarationEntry  goto 292
+	psmBody  goto 731
+
+state 699
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain psmBody.    (180)
+
+	.  reduce 180 (src line 3175)
+
+
+state 700
+	domain:  DECIMAL LPAREN INTVALUE COMMA INTVALUE.RPAREN 
+
+	RPAREN  shift 732
+	.  error
+
+
+state 701
+	domain:  NUMERIC LPAREN INTVALUE COMMA INTVALUE.RPAREN $$326 DATE 
+
+	RPAREN  shift 733
+	.  error
+
+
+state 702
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES LPAREN elementaryValueList RPAREN.SEMICOLON 
+
+	SEMICOLON  shift 734
+	.  error
+
+
+state 703
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY.orderByList 
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY.orderByList LIMIT INTVALUE COMMA INTVALUE 
+
+	SUM  shift 98
+	AVG  shift 99
+	MIN  shift 100
+	MAX  shift 101
+	COUNT  shift 102
+	INTVALUE  shift 106
+	FLOATVALUE  shift 107
+	STRINGVALUE  shift 108
+	BOOLVALUE  shift 109
+	LPAREN  shift 105
+	ID  shift 97
+	.  error
+
+	orderByList  goto 735
+	orderByListEntry  goto 227
+	aggregation  goto 173
+	expression  goto 229
+	expressionEntry  goto 103
+	attriNameOptionTableName  goto 228
+	elementaryValue  goto 104
+
+state 704
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 736
+	.  error
+
+
+state 705
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 737
+	.  error
+
+
+state 706
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 738
+	.  error
+
+
+state 707
+	query:  selectStmt fromStmt WHERE condition ORDERBY orderByList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 739
+	.  error
+
+
+state 708
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN NOT IN subQuery.    (303)
+
+	.  reduce 303 (src line 4551)
+
+
+state 709
+	predicate:  LPAREN attriNameOptionTableNameList RPAREN NOT IN ID.    (305)
+
+	.  reduce 305 (src line 4571)
+
+
+state 710
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 740
+	.  error
+
+
+state 711
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 741
+	.  error
+
+
+state 712
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 742
+	.  error
+
+
+state 713
+	onList:  onList AND onListEntry.    (75)
+
+	.  reduce 75 (src line 1839)
+
+
+state 714
+	onListEntry:  attriNameOptionTableName EQUAL attriNameOptionTableName.    (77)
+
+	.  reduce 77 (src line 1853)
+
+
+state 715
+	joinStmt:  ID FULL OUTER JOIN ID ON onList.    (72)
+	onList:  onList.AND onListEntry 
+
+	AND  shift 663
+	.  reduce 72 (src line 1806)
+
+
+state 716
+	joinStmt:  ID LEFT OUTER JOIN ID ON onList.    (73)
+	onList:  onList.AND onListEntry 
+
+	AND  shift 663
+	.  reduce 73 (src line 1816)
+
+
+state 717
+	joinStmt:  ID RIGHT OUTER JOIN ID ON onList.    (74)
+	onList:  onList.AND onListEntry 
+
+	AND  shift 663
+	.  reduce 74 (src line 1826)
+
+
+state 718
+	constraint:  UNIQUE LPAREN attriNameList RPAREN.    (248)
+
+	.  reduce 248 (src line 3926)
+
+
+state 719
+	constraint:  PRIMARYKEY LPAREN attriNameList RPAREN.    (249)
+
+	.  reduce 249 (src line 3936)
+
+
+state 720
+	constraint:  CHECK LPAREN condition RPAREN.    (250)
+
+	.  reduce 250 (src line 3945)
+
+
+state 721
+	constraint:  FOREIGNKEY LPAREN ID RPAREN.REFERENCES ID LPAREN ID RPAREN 
+	constraint:  FOREIGNKEY LPAREN ID RPAREN.REFERENCES ID LPAREN ID RPAREN foreignKeyParameter 
+
+	REFERENCES  shift 743
+	.  error
+
+
+state 722
+	constraintAfterAttribute:  REFERENCES ID LPAREN ID.RPAREN 
+	constraintAfterAttribute:  REFERENCES ID LPAREN ID.RPAREN foreignKeyParameter 
+
+	RPAREN  shift 744
+	.  error
+
+
+state 723
+	triggerBeforeAfterStmt:  INSTEAD OF UPDATE OF ID ON ID.    (155)
+
+	.  reduce 155 (src line 2873)
+
+
+state 724
+	psmForLoop:  FOR ID AS ID CURSOR FOR.subQuery DO psmExecList END FOR SEMICOLON 
+
+	LPAREN  shift 154
+	.  error
+
+	subQuery  goto 745
+
+state 725
+	psmBranch:  IF condition THEN psmExecList psmElseifList ELSE.psmExecList END IF SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecList  goto 746
+	psmExecEntry  goto 294
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 726
+	psmBranch:  IF condition THEN psmExecList psmElseifList END.IF SEMICOLON 
+
+	IF  shift 747
+	.  error
+
+
+state 727
+	psmElseifList:  psmElseifList psmElseifEntry.    (204)
+
+	.  reduce 204 (src line 3419)
+
+
+state 728
+	psmExecList:  psmExecList.psmExecEntry 
+	psmBranch:  IF condition THEN psmExecList ELSE psmExecList.END IF SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	END  shift 748
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecEntry  goto 430
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 729
+	psmBranch:  IF condition THEN psmExecList END IF.SEMICOLON 
+
+	SEMICOLON  shift 749
+	.  error
+
+
+state 730
+	psmElseifEntry:  ELSEIF condition.THEN psmExecList 
+	condition:  condition.AND condition 
+	condition:  condition.OR condition 
+
+	AND  shift 339
+	OR  shift 340
+	THEN  shift 750
+	.  error
+
+
+state 731
+	createPsmStmt:  CREATE FUNCTION ID LPAREN psmParameterList RPAREN RETURNS domain psmLocalDeclarationList psmBody.    (179)
+
+	.  reduce 179 (src line 3162)
+
+
+state 732
+	domain:  DECIMAL LPAREN INTVALUE COMMA INTVALUE RPAREN.    (325)
+
+	.  reduce 325 (src line 4738)
+
+
+state 733
+	domain:  NUMERIC LPAREN INTVALUE COMMA INTVALUE RPAREN.$$326 DATE 
+	$$326: .    (326)
+
+	.  reduce 326 (src line 4747)
+
+	$$326  goto 751
+
+state 734
+	insertStmt:  INSERTINTO ID LPAREN attriNameList RPAREN VALUES LPAREN elementaryValueList RPAREN SEMICOLON.    (121)
+
+	.  reduce 121 (src line 2297)
+
+
+state 735
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList.    (40)
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList.LIMIT INTVALUE COMMA INTVALUE 
+	orderByList:  orderByList.COMMA orderByListEntry 
+
+	LIMIT  shift 752
+	COMMA  shift 363
+	.  reduce 40 (src line 1199)
+
+
+state 736
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 753
+	.  error
+
+
+state 737
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 754
+	.  error
+
+
+state 738
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList LIMIT INTVALUE COMMA INTVALUE.    (45)
+
+	.  reduce 45 (src line 1354)
+
+
+state 739
+	query:  selectStmt fromStmt WHERE condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE.    (48)
+
+	.  reduce 48 (src line 1453)
+
+
+state 740
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 755
+	.  error
+
+
+state 741
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE.    (44)
+
+	.  reduce 44 (src line 1321)
+
+
+state 742
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE.    (49)
+
+	.  reduce 49 (src line 1486)
+
+
+state 743
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES.ID LPAREN ID RPAREN 
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES.ID LPAREN ID RPAREN foreignKeyParameter 
+
+	ID  shift 756
+	.  error
+
+
+state 744
+	constraintAfterAttribute:  REFERENCES ID LPAREN ID RPAREN.    (258)
+	constraintAfterAttribute:  REFERENCES ID LPAREN ID RPAREN.foreignKeyParameter 
+
+	NOT_DEFERRABLE  shift 761
+	DEFERED_DEFERRABLE  shift 762
+	IMMEDIATE_DEFERRABLE  shift 763
+	UPDATE_NULL  shift 764
+	UPDATE_CASCADE  shift 765
+	DELETE_NULL  shift 766
+	DELETE_CASCADE  shift 767
+	.  reduce 258 (src line 4035)
+
+	setDeferrable  goto 758
+	onUpdateSet  goto 759
+	onDeleteSet  goto 760
+	foreignKeyParameter  goto 757
+
+state 745
+	psmForLoop:  FOR ID AS ID CURSOR FOR subQuery.DO psmExecList END FOR SEMICOLON 
+
+	DO  shift 768
+	.  error
+
+
+state 746
+	psmExecList:  psmExecList.psmExecEntry 
+	psmBranch:  IF condition THEN psmExecList psmElseifList ELSE psmExecList.END IF SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	END  shift 769
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecEntry  goto 430
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 747
+	psmBranch:  IF condition THEN psmExecList psmElseifList END IF.SEMICOLON 
+
+	SEMICOLON  shift 770
+	.  error
+
+
+state 748
+	psmBranch:  IF condition THEN psmExecList ELSE psmExecList END.IF SEMICOLON 
+
+	IF  shift 771
+	.  error
+
+
+state 749
+	psmBranch:  IF condition THEN psmExecList END IF SEMICOLON.    (203)
+
+	.  reduce 203 (src line 3405)
+
+
+state 750
+	psmElseifEntry:  ELSEIF condition THEN.psmExecList 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecList  goto 772
+	psmExecEntry  goto 294
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 751
+	domain:  NUMERIC LPAREN INTVALUE COMMA INTVALUE RPAREN $$326.DATE 
+
+	DATE  shift 773
+	.  error
+
+
+state 752
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT.INTVALUE COMMA INTVALUE 
+
+	INTVALUE  shift 774
+	.  error
+
+
+state 753
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 775
+	.  error
+
+
+state 754
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 776
+	.  error
+
+
+state 755
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 777
+	.  error
+
+
+state 756
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID.LPAREN ID RPAREN 
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID.LPAREN ID RPAREN foreignKeyParameter 
+
+	LPAREN  shift 778
+	.  error
+
+
+state 757
+	constraintAfterAttribute:  REFERENCES ID LPAREN ID RPAREN foreignKeyParameter.    (259)
+
+	.  reduce 259 (src line 4045)
+
+
+state 758
+	foreignKeyParameter:  setDeferrable.    (260)
+	foreignKeyParameter:  setDeferrable.onUpdateSet 
+	foreignKeyParameter:  setDeferrable.onDeleteSet 
+	foreignKeyParameter:  setDeferrable.onUpdateSet onDeleteSet 
+	foreignKeyParameter:  setDeferrable.onDeleteSet onUpdateSet 
+
+	UPDATE_NULL  shift 764
+	UPDATE_CASCADE  shift 765
+	DELETE_NULL  shift 766
+	DELETE_CASCADE  shift 767
+	.  reduce 260 (src line 4071)
+
+	onUpdateSet  goto 779
+	onDeleteSet  goto 780
+
+state 759
+	foreignKeyParameter:  onUpdateSet.    (261)
+	foreignKeyParameter:  onUpdateSet.setDeferrable 
+	foreignKeyParameter:  onUpdateSet.onDeleteSet 
+	foreignKeyParameter:  onUpdateSet.setDeferrable onDeleteSet 
+	foreignKeyParameter:  onUpdateSet.onDeleteSet setDeferrable 
+
+	NOT_DEFERRABLE  shift 761
+	DEFERED_DEFERRABLE  shift 762
+	IMMEDIATE_DEFERRABLE  shift 763
+	DELETE_NULL  shift 766
+	DELETE_CASCADE  shift 767
+	.  reduce 261 (src line 4082)
+
+	setDeferrable  goto 781
+	onDeleteSet  goto 782
+
+state 760
+	foreignKeyParameter:  onDeleteSet.    (262)
+	foreignKeyParameter:  onDeleteSet.setDeferrable 
+	foreignKeyParameter:  onDeleteSet.onUpdateSet 
+	foreignKeyParameter:  onDeleteSet.setDeferrable onUpdateSet 
+	foreignKeyParameter:  onDeleteSet.onUpdateSet setDeferrable 
+
+	NOT_DEFERRABLE  shift 761
+	DEFERED_DEFERRABLE  shift 762
+	IMMEDIATE_DEFERRABLE  shift 763
+	UPDATE_NULL  shift 764
+	UPDATE_CASCADE  shift 765
+	.  reduce 262 (src line 4092)
+
+	setDeferrable  goto 783
+	onUpdateSet  goto 784
+
+state 761
+	setDeferrable:  NOT_DEFERRABLE.    (275)
+
+	.  reduce 275 (src line 4243)
+
+
+state 762
+	setDeferrable:  DEFERED_DEFERRABLE.    (276)
+
+	.  reduce 276 (src line 4249)
+
+
+state 763
+	setDeferrable:  IMMEDIATE_DEFERRABLE.    (277)
+
+	.  reduce 277 (src line 4254)
+
+
+state 764
+	onUpdateSet:  UPDATE_NULL.    (278)
+
+	.  reduce 278 (src line 4262)
+
+
+state 765
+	onUpdateSet:  UPDATE_CASCADE.    (279)
+
+	.  reduce 279 (src line 4268)
+
+
+state 766
+	onDeleteSet:  DELETE_NULL.    (280)
+
+	.  reduce 280 (src line 4276)
+
+
+state 767
+	onDeleteSet:  DELETE_CASCADE.    (281)
+
+	.  reduce 281 (src line 4282)
+
+
+state 768
+	psmForLoop:  FOR ID AS ID CURSOR FOR subQuery DO.psmExecList END FOR SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecList  goto 785
+	psmExecEntry  goto 294
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 769
+	psmBranch:  IF condition THEN psmExecList psmElseifList ELSE psmExecList END.IF SEMICOLON 
+
+	IF  shift 786
+	.  error
+
+
+state 770
+	psmBranch:  IF condition THEN psmExecList psmElseifList END IF SEMICOLON.    (201)
+
+	.  reduce 201 (src line 3381)
+
+
+state 771
+	psmBranch:  IF condition THEN psmExecList ELSE psmExecList END IF.SEMICOLON 
+
+	SEMICOLON  shift 787
+	.  error
+
+
+state 772
+	psmExecList:  psmExecList.psmExecEntry 
+	psmElseifEntry:  ELSEIF condition THEN psmExecList.    (206)
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  reduce 206 (src line 3433)
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecEntry  goto 430
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 773
+	domain:  NUMERIC LPAREN INTVALUE COMMA INTVALUE RPAREN $$326 DATE.    (327)
+
+	.  reduce 327 (src line 4756)
+
+
+state 774
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE.COMMA INTVALUE 
+
+	COMMA  shift 788
+	.  error
+
+
+state 775
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition LIMIT INTVALUE COMMA INTVALUE.    (46)
+
+	.  reduce 46 (src line 1387)
+
+
+state 776
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE.    (51)
+
+	.  reduce 51 (src line 1553)
+
+
+state 777
+	query:  selectStmt fromStmt GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE.    (50)
+
+	.  reduce 50 (src line 1519)
+
+
+state 778
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN.ID RPAREN 
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN.ID RPAREN foreignKeyParameter 
+
+	ID  shift 789
+	.  error
+
+
+state 779
+	foreignKeyParameter:  setDeferrable onUpdateSet.    (263)
+	foreignKeyParameter:  setDeferrable onUpdateSet.onDeleteSet 
+
+	DELETE_NULL  shift 766
+	DELETE_CASCADE  shift 767
+	.  reduce 263 (src line 4102)
+
+	onDeleteSet  goto 790
+
+state 780
+	foreignKeyParameter:  setDeferrable onDeleteSet.    (265)
+	foreignKeyParameter:  setDeferrable onDeleteSet.onUpdateSet 
+
+	UPDATE_NULL  shift 764
+	UPDATE_CASCADE  shift 765
+	.  reduce 265 (src line 4124)
+
+	onUpdateSet  goto 791
+
+state 781
+	foreignKeyParameter:  onUpdateSet setDeferrable.    (264)
+	foreignKeyParameter:  onUpdateSet setDeferrable.onDeleteSet 
+
+	DELETE_NULL  shift 766
+	DELETE_CASCADE  shift 767
+	.  reduce 264 (src line 4113)
+
+	onDeleteSet  goto 792
+
+state 782
+	foreignKeyParameter:  onUpdateSet onDeleteSet.    (267)
+	foreignKeyParameter:  onUpdateSet onDeleteSet.setDeferrable 
+
+	NOT_DEFERRABLE  shift 761
+	DEFERED_DEFERRABLE  shift 762
+	IMMEDIATE_DEFERRABLE  shift 763
+	.  reduce 267 (src line 4146)
+
+	setDeferrable  goto 793
+
+state 783
+	foreignKeyParameter:  onDeleteSet setDeferrable.    (266)
+	foreignKeyParameter:  onDeleteSet setDeferrable.onUpdateSet 
+
+	UPDATE_NULL  shift 764
+	UPDATE_CASCADE  shift 765
+	.  reduce 266 (src line 4135)
+
+	onUpdateSet  goto 794
+
+state 784
+	foreignKeyParameter:  onDeleteSet onUpdateSet.    (268)
+	foreignKeyParameter:  onDeleteSet onUpdateSet.setDeferrable 
+
+	NOT_DEFERRABLE  shift 761
+	DEFERED_DEFERRABLE  shift 762
+	IMMEDIATE_DEFERRABLE  shift 763
+	.  reduce 268 (src line 4157)
+
+	setDeferrable  goto 795
+
+state 785
+	psmExecList:  psmExecList.psmExecEntry 
+	psmForLoop:  FOR ID AS ID CURSOR FOR subQuery DO psmExecList.END FOR SEMICOLON 
+
+	INSERTINTO  shift 38
+	UPDATE  shift 39
+	DELETE  shift 37
+	FOR  shift 300
+	END  shift 796
+	IF  shift 301
+	RETURN  shift 295
+	SET  shift 296
+	.  error
+
+	dml  goto 299
+	deleteStmt  goto 20
+	insertStmt  goto 21
+	updateStmt  goto 22
+	psmExecEntry  goto 430
+	psmForLoop  goto 297
+	psmBranch  goto 298
+
+state 786
+	psmBranch:  IF condition THEN psmExecList psmElseifList ELSE psmExecList END IF.SEMICOLON 
+
+	SEMICOLON  shift 797
+	.  error
+
+
+state 787
+	psmBranch:  IF condition THEN psmExecList ELSE psmExecList END IF SEMICOLON.    (202)
+
+	.  reduce 202 (src line 3393)
+
+
+state 788
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA.INTVALUE 
+
+	INTVALUE  shift 798
+	.  error
+
+
+state 789
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN ID.RPAREN 
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN ID.RPAREN foreignKeyParameter 
+
+	RPAREN  shift 799
+	.  error
+
+
+state 790
+	foreignKeyParameter:  setDeferrable onUpdateSet onDeleteSet.    (269)
+
+	.  reduce 269 (src line 4168)
+
+
+state 791
+	foreignKeyParameter:  setDeferrable onDeleteSet onUpdateSet.    (270)
+
+	.  reduce 270 (src line 4180)
+
+
+state 792
+	foreignKeyParameter:  onUpdateSet setDeferrable onDeleteSet.    (271)
+
+	.  reduce 271 (src line 4192)
+
+
+state 793
+	foreignKeyParameter:  onUpdateSet onDeleteSet setDeferrable.    (272)
+
+	.  reduce 272 (src line 4204)
+
+
+state 794
+	foreignKeyParameter:  onDeleteSet setDeferrable onUpdateSet.    (273)
+
+	.  reduce 273 (src line 4216)
+
+
+state 795
+	foreignKeyParameter:  onDeleteSet onUpdateSet setDeferrable.    (274)
+
+	.  reduce 274 (src line 4228)
+
+
+state 796
+	psmForLoop:  FOR ID AS ID CURSOR FOR subQuery DO psmExecList END.FOR SEMICOLON 
+
+	FOR  shift 800
+	.  error
+
+
+state 797
+	psmBranch:  IF condition THEN psmExecList psmElseifList ELSE psmExecList END IF SEMICOLON.    (200)
+
+	.  reduce 200 (src line 3367)
+
+
+state 798
+	query:  selectStmt fromStmt WHERE condition GROUPBY attriNameOptionTableNameList HAVING condition ORDERBY orderByList LIMIT INTVALUE COMMA INTVALUE.    (52)
+
+	.  reduce 52 (src line 1587)
+
+
+state 799
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN ID RPAREN.    (251)
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN ID RPAREN.foreignKeyParameter 
+
+	NOT_DEFERRABLE  shift 761
+	DEFERED_DEFERRABLE  shift 762
+	IMMEDIATE_DEFERRABLE  shift 763
+	UPDATE_NULL  shift 764
+	UPDATE_CASCADE  shift 765
+	DELETE_NULL  shift 766
+	DELETE_CASCADE  shift 767
+	.  reduce 251 (src line 3954)
+
+	setDeferrable  goto 758
+	onUpdateSet  goto 759
+	onDeleteSet  goto 760
+	foreignKeyParameter  goto 801
+
+state 800
+	psmForLoop:  FOR ID AS ID CURSOR FOR subQuery DO psmExecList END FOR.SEMICOLON 
+
+	SEMICOLON  shift 802
+	.  error
+
+
+state 801
+	constraint:  FOREIGNKEY LPAREN ID RPAREN REFERENCES ID LPAREN ID RPAREN foreignKeyParameter.    (252)
+
+	.  reduce 252 (src line 3965)
+
+
+state 802
+	psmForLoop:  FOR ID AS ID CURSOR FOR subQuery DO psmExecList END FOR SEMICOLON.    (199)
+
+	.  reduce 199 (src line 3353)
+
+
+153 terminals, 88 nonterminals
+339 grammar rules, 803/16000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+137 working sets used
+memory: parser 478/240000
+231 extra closures
+1215 shift entries, 26 exceptions
+284 goto entries
+186 entries saved by goto default
+Optimizer space used: output 1048/240000
+1048 table entries, 0 zero
+maximum spread: 153, maximum offset: 799
