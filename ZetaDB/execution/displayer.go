@@ -1,9 +1,9 @@
 package execution
 
 import (
-	"ZetaDB/container"
-	its "ZetaDB/physicalPlan"
-	. "ZetaDB/utility"
+	"ZETA_server/ZetaDB/container"
+	its "ZETA_server/ZetaDB/physicalPlan"
+	. "ZETA_server/ZetaDB/utility"
 	"fmt"
 	"strconv"
 	"sync"

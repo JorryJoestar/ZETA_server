@@ -1,6 +1,6 @@
 package container
 
-import "ZetaDB/utility"
+import "ZETA_server/ZetaDB/utility"
 
 type Request struct {
 	UserId int32

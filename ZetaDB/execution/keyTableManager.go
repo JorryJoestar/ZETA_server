@@ -1,11 +1,11 @@
 package execution
 
 import (
-	"ZetaDB/container"
-	"ZetaDB/parser"
-	its "ZetaDB/physicalPlan"
-	"ZetaDB/storage"
-	. "ZetaDB/utility"
+	"ZETA_server/ZetaDB/container"
+	"ZETA_server/ZetaDB/parser"
+	its "ZETA_server/ZetaDB/physicalPlan"
+	"ZETA_server/ZetaDB/storage"
+	. "ZETA_server/ZetaDB/utility"
 	"errors"
 	"sync"
 )

@@ -1,12 +1,12 @@
 package execution
 
 import (
-	"ZetaDB/container"
-	"ZetaDB/parser"
-	pp "ZetaDB/physicalPlan"
-	subOperator "ZetaDB/physicalPlan"
-	"ZetaDB/storage"
-	"ZetaDB/utility"
+	"ZETA_server/ZetaDB/container"
+	"ZETA_server/ZetaDB/parser"
+	pp "ZETA_server/ZetaDB/physicalPlan"
+	subOperator "ZETA_server/ZetaDB/physicalPlan"
+	"ZETA_server/ZetaDB/storage"
+	"ZETA_server/ZetaDB/utility"
 	"strconv"
 	"sync"
 )

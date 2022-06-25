@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"ZETA_server/ZetaDB"
+	"fmt"
+)
 
 func main() {
-	fmt.Println("a")
+	fmt.Println(ZetaDB.ExecuteSql(0, "initialize;"))
 }
