@@ -79,3 +79,7 @@ func (db *Database) ExecuteSql(currentUserId int32, sqlString string) (int32, st
 		return 0, executionResult
 	}
 }
+
+func GetParser() *parser.Parser {
+	return parser.GetParser()
+}
