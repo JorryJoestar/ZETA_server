@@ -23,16 +23,18 @@ func (n *Node) Send_Greeting(toAddr string) {
 	}
 
 }
-func (n *Node) Send_Heartbeat(toAddr string, termId uint32, syncId uint32, nodeSyncId uint32, sqlRecords []SqlRecord, addresses []string, dropAddresses []string) {
+func (n *Node) Send_Heartbeat(toAddr string, termId uint32, syncId uint32, fromSyncId uint32, nodeSyncId uint32, fromNodeSyncId uint32, sqlRecords []SqlRecord, addresses []string, dropAddresses []string) {
 	newHeartbeat := Heartbeat{
-		FromAddr:      n.SelfAddr,
-		ToAddr:        toAddr,
-		TermId:        termId,
-		SyncId:        syncId,
-		NodeSyncId:    nodeSyncId,
-		SqlRecords:    sqlRecords,
-		Addresses:     addresses,
-		DropAddresses: dropAddresses,
+		FromAddr:       n.SelfAddr,
+		ToAddr:         toAddr,
+		TermId:         termId,
+		SyncId:         syncId,
+		FromSyncId:     fromSyncId,
+		NodeSyncId:     nodeSyncId,
+		FromNodeSyncId: fromNodeSyncId,
+		SqlRecords:     sqlRecords,
+		Addresses:      addresses,
+		DropAddresses:  dropAddresses,
 	}
 
 	bytes, _ := json.Marshal(newHeartbeat)

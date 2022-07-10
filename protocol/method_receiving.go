@@ -167,7 +167,7 @@ func (n *Node) Receive_VOTE(v Vote) {
 
 			//send heartbeat to every node
 			for _, nodeAddr := range n.AddressLog {
-				n.Send_Heartbeat(nodeAddr, n.CurrentTermId, n.CurrentSyncId, n.CurrentNodeSyncId, nil, nil, nil)
+				n.Send_Heartbeat(nodeAddr, n.CurrentTermId, n.CurrentSyncId, n.CurrentSyncId, n.CurrentNodeSyncId, n.CurrentNodeSyncId, nil, nil, nil)
 			}
 
 			//start heartbeat timer

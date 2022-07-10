@@ -13,9 +13,13 @@ type Heartbeat struct {
 	FromAddr string
 	ToAddr   string
 
-	TermId     uint32
+	TermId uint32
+
 	SyncId     uint32
-	NodeSyncId uint32
+	FromSyncId uint32
+
+	NodeSyncId     uint32
+	FromNodeSyncId uint32
 
 	SqlRecords    []SqlRecord
 	Addresses     []string

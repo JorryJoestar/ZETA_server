@@ -9,19 +9,19 @@ import (
 func (n *Node) Check_AddressIncluded(address string) bool {
 
 	for _, bufferAddr := range n.AddressBuffer {
-		if bufferAddr.Address == address {
+		if bufferAddr == address {
 			return true
 		}
 	}
 
 	for _, heartbeatAddr := range n.AddressInMessage {
-		if heartbeatAddr.Address == address {
+		if heartbeatAddr == address {
 			return true
 		}
 	}
 
 	for _, logAddr := range n.AddressLog {
-		if logAddr.Address == address {
+		if logAddr == address {
 			return true
 		}
 	}
