@@ -148,7 +148,7 @@ func (n *Node) Receive_HEARTBEATRESPONSE(h HeartbeatResponse) {
 
 func (n *Node) Receive_VOTEREQUEST(v VoteRequest) {
 	if n.CurrentState == FOLLOWER && n.CurrentTermId < v.TermId {
-		n.Set_ElectionTimeout()
+		n.Start_ElectionTimeout()
 		n.CurrentTermId = v.TermId
 
 		//send vote

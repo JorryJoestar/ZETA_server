@@ -1,5 +1,11 @@
 package protocol
 
+import (
+	"crypto/rand"
+	"math/big"
+	"time"
+)
+
 func (n *Node) Reach_ElectionTimeout() {
 	//node ready to compete for being LEADER
 
@@ -22,6 +28,11 @@ func (n *Node) Reach_ElectionTimeout() {
 }
 
 func (n *Node) Reach_HeartbeatTimeout() {
+	//if current node is not a LEADER
+	if n.CurrentState != LEADER {
+		return
+	}
+
 	//create sendSyncId, sendNodeSyncId, senSqlRecords, sendAddresses, sendDropAddresses
 	var sendSyncId uint32
 	var sendNodeSyncId uint32
@@ -156,9 +167,22 @@ func (n *Node) Reach_HeartbeatTimeout() {
 
 		n.Send_Heartbeat(nodeAddr, n.CurrentTermId, sendSyncId, sendFromSyncId, sendNodeSyncId, sendFromNodeSyncId, senSqlRecords, sendAddresses, sendDropAddresses)
 	}
+
+	//start heartbeat timer
+	n.Start_HeartbeatTimeout()
 }
 
-func (n *Node) Set_ElectionTimeout()   {}
-func (n *Node) Set_HeartbeatTimeout()  {}
-func (n *Node) Stop_ElectionTimeout()  {}
-func (n *Node) Stop_HeartbeatTimeout() {}
+//start or reset election timeout
+func (n *Node) Start_ElectionTimeout() {
+	//get a random time between ElectionLowBound and ElectionHighBound
+	randomN, _ := rand.Int(rand.Reader, big.NewInt(100))
+	randomF64 := float64(randomN.Int64()) / 100 * (float64(n.ElectionHighBound) - float64(n.ElectionLowBound))
+	randomTime := int(randomF64) + int(n.ElectionLowBound)
+
+	time.NewTimer(time.Duration(randomTime) * time.Second)
+}
+
+//start or reset heartbeat timeout
+func (n *Node) Start_HeartbeatTimeout() {
+	n.HeartbeatTimer = *time.NewTimer(time.Duration(n.HeartbeatTimeout) * time.Millisecond)
+}
